@@ -29,6 +29,16 @@ before_deploy:
     export BEFORE_DEPLOY_RAN=true
   fi
 deploy:
+- provider: npm
+  on:
+    branch:
+    - master
+    - develop
+    - smoke
+  skip_cleanup: true
+  email: $NPM_EMAIL
+  api_key: $NPM_TOKEN
+  tag: $NPM_TAG
 - provider: script
   on:
     all_branches: true
