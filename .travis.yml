@@ -29,27 +29,6 @@ before_deploy:
     export BEFORE_DEPLOY_RAN=true
   fi
 deploy:
-- provider: npm
-  on:
-    branch:
-    - master
-    - develop
-    - smoke
-  skip_cleanup: true
-  email: $NPM_EMAIL
-  api_key: $NPM_TOKEN
-  tag: $NPM_TAG
-- provider: s3
-  on:
-    branch:
-    - master
-    - $PREVIEW_BRANCH
-  access_key_id: $AWS_ACCESS_KEY_ID
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
-  bucket: $AWS_BUCKET_NAME
-  acl: public_read
-  skip_cleanup: true
-  local_dir: build
 - provider: script
   on:
     all_branches: true
@@ -59,5 +38,3 @@ deploy:
   on:
     all_branches: true
   script: npm run prune -- https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
-after_deploy:
-- 'curl -X POST -H "Fastly-Key: $FASTLY_TOKEN" -H "Accept: application/json" https://api.fastly.com/service/$FASTLY_SERVICE_ID/purge_all'
