@@ -1,8 +1,8 @@
 {
-  "name": "scratch-gui",
+  "name": "@bbge/gui",
   "version": "0.1.0",
-  "description": "GraphicaL User Interface for creating and running Scratch 3.0 projects",
-  "main": "./dist/scratch-gui.js",
+  "description": "Graphical User Interface for creating and running BBGE projects",
+  "main": "./dist/@bbge/gui.js",
   "scripts": {
     "build": "npm run clean && webpack --progress --colors --bail",
     "clean": "rimraf ./build && mkdirp build && rimraf ./dist && mkdirp dist",
@@ -20,10 +20,10 @@
   },
   "author": "Massachusetts Institute of Technology",
   "license": "BSD-3-Clause",
-  "homepage": "https://github.com/LLK/scratch-gui#readme",
+  "homepage": "https://github.com/FBDY/bb-gui#readme",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/LLK/scratch-gui.git"
+    "url": "https://git@github.com/FBDY/bb-gui.git"
   },
   "peerDependencies": {
     "react": "^16.0.0",
@@ -103,13 +103,13 @@
     "redux-throttle": "0.1.1",
     "rimraf": "^2.6.1",
     "scratch-audio": "0.1.0-prerelease.20181023202904",
-    "scratch-blocks": "0.1.0-prerelease.1543933873",
+    "@bbge/blocks": "0.0.1-prerelease.20181204181643",
     "scratch-l10n": "3.1.20181129221712",
     "scratch-paint": "0.2.0-prerelease.20181203192800",
     "scratch-render": "0.1.0-prerelease.20181127194508",
     "scratch-storage": "1.2.0",
     "scratch-svg-renderer": "0.2.0-prerelease.20181126212715",
-    "scratch-vm": "0.2.0-prerelease.20181204154110",
+    "@bbge/vm": "0.0.1-prerelease.20181204181643",
     "selenium-webdriver": "3.6.0",
     "startaudiocontext": "1.2.1",
     "style-loader": "^0.23.0",

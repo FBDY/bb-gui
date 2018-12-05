@@ -165,7 +165,7 @@ module.exports = [
                 to: 'static'
             }]),
             new CopyWebpackPlugin([{
-                from: 'node_modules/scratch-blocks/media',
+                from: 'node_modules/@bbge/blocks/media',
                 to: 'static/blocks-media'
             }]),
             new CopyWebpackPlugin([{
@@ -175,7 +175,7 @@ module.exports = [
             }]),
             new CopyWebpackPlugin([{
                 from: 'extension-worker.{js,js.map}',
-                context: 'node_modules/scratch-vm/dist/web'
+                context: 'node_modules/@bbge/vm/dist/web'
             }])
         ])
     })
@@ -185,7 +185,7 @@ module.exports = [
         defaultsDeep({}, base, {
             target: 'web',
             entry: {
-                'scratch-gui': './src/index.js'
+                '@bbge/gui': './src/index.js'
             },
             output: {
                 libraryTarget: 'umd',
@@ -209,12 +209,12 @@ module.exports = [
             },
             plugins: base.plugins.concat([
                 new CopyWebpackPlugin([{
-                    from: 'node_modules/scratch-blocks/media',
+                    from: 'node_modules/@bbge/blocks/media',
                     to: 'static/blocks-media'
                 }]),
                 new CopyWebpackPlugin([{
                     from: 'extension-worker.{js,js.map}',
-                    context: 'node_modules/scratch-vm/dist/web'
+                    context: 'node_modules/@bbge/vm/dist/web'
                 }])
             ])
         })) : []

@@ -8,7 +8,7 @@ import {addMonitorRect, getInitialPosition, resizeMonitorRect, removeMonitorRect
 
 import {connect} from 'react-redux';
 import {Map} from 'immutable';
-import VM from 'scratch-vm';
+import VM from '@bbge/vm';
 
 const availableModes = opcode => (
     monitorModes.filter(t => {

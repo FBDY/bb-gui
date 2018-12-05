@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 
-import VM from 'scratch-vm';
+import VM from '@bbge/vm';
 import storage from '../lib/storage';
 import getCostumeUrl from '../lib/get-costume-url';
 
