@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {connect} from 'react-redux';
-import VM from 'scratch-vm';
+import VM from '@bbge/vm';
 import greenFlag from '../components/green-flag/icon--green-flag.svg';
 
 class GreenFlagOverlay extends React.Component {

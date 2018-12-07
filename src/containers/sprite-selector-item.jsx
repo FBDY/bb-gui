@@ -7,7 +7,7 @@ import {setHoveredSprite} from '../reducers/hovered-target';
 import {updateAssetDrag} from '../reducers/asset-drag';
 import storage from '../lib/storage';
 import {getEventXY} from '../lib/touch-utils';
-import VM from 'scratch-vm';
+import VM from '@bbge/vm';
 import getCostumeUrl from '../lib/get-costume-url';
 
 import SpriteSelectorItemComponent from '../components/sprite-selector-item/sprite-selector-item.jsx';

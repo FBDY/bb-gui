@@ -8,7 +8,7 @@ node_js:
 env:
   global:
   - NODE_ENV=production
-  - SMOKE_URL=https://llk.github.io/scratch-gui/$TRAVIS_PULL_REQUEST_BRANCH
+  - SMOKE_URL=https://FBDY.github.io/bb-gui/$TRAVIS_PULL_REQUEST_BRANCH
   - NPM_TAG=latest
 cache:
   directories:
