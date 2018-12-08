@@ -14,6 +14,9 @@ const motion = function (isStage, targetId) {
         ${isStage ? `
         <label text="${stageSelected}"></label>
         ` : `
+        <block type="motion_gather_clones">
+        </block>
+        ${blockSeparator}
         <block type="motion_movesteps">
             <value name="STEPS">
                 <shadow type="math_number">
