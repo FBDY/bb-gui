@@ -1181,5 +1181,26 @@ export default {
             ]
         }],
         urlId: 'add-effects'
+    },
+    'wedo2-getting-started': {
+        steps: [{
+            video: '4im7iizv47'
+        }],
+        urlId: 'wedo',
+        hidden: true
+    },
+    'ev3-getting-started': {
+        steps: [{
+            video: 'qgu78c5y7d'
+        }],
+        urlId: 'ev3',
+        hidden: true
+    },
+    'whats-new': {
+        steps: [{
+            video: 'mtqymxg0qq'
+        }],
+        urlId: 'whatsnew',
+        hidden: true
     }
 };
