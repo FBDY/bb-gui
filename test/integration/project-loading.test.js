@@ -23,7 +23,7 @@ describe('Loading scratch gui', () => {
         await driver.quit();
     });
 
-    test('The "Not Now" button sends you to scratch', async () => {
+    xtest('The "Not Now" button sends you to scratch', async () => {
         await loadUri(uri);
         await clickText('Not Now');
         const currentUrl = await driver.getCurrentUrl();
@@ -32,7 +32,7 @@ describe('Loading scratch gui', () => {
 
     describe('Loading projects by ID', () => {
 
-        test('Load 2.0 project using import modal', async () => {
+        xtest('Load 2.0 project using import modal', async () => {
             await loadUri(uri);
             await clickText('View 2.0 Project');
             const el = await findByXpath("//input[@placeholder='scratch.mit.edu/projects/123456789']");
@@ -47,7 +47,7 @@ describe('Loading scratch gui', () => {
             await expect(logs).toEqual([]);
         });
 
-        test('Invalid url when loading project through modal lets you try again', async () => {
+        xtest('Invalid url when loading project through modal lets you try again', async () => {
             await loadUri(uri);
             await clickText('View 2.0 Project');
             let el = await findByXpath("//input[@placeholder='scratch.mit.edu/projects/123456789']");

@@ -23,7 +23,6 @@ describe('Menu bar settings', () => {
 
     test('File->New should be enabled', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickXpath(
             '//div[contains(@class, "menu-bar_menu-bar-item") and ' +
             'contains(@class, "menu-bar_hoverable")][span[text()="File"]]'
@@ -33,7 +32,6 @@ describe('Menu bar settings', () => {
 
     test('File->Load should be enabled', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickXpath(
             '//div[contains(@class, "menu-bar_menu-bar-item") and ' +
             'contains(@class, "menu-bar_hoverable")][span[text()="File"]]'
@@ -43,7 +41,6 @@ describe('Menu bar settings', () => {
 
     test('File->Save should be enabled', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickXpath(
             '//div[contains(@class, "menu-bar_menu-bar-item") and ' +
             'contains(@class, "menu-bar_hoverable")][span[text()="File"]]'
@@ -53,7 +50,6 @@ describe('Menu bar settings', () => {
 
     test('Share button should NOT be enabled', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await findByXpath('//div[span[div[span[text()="Share"]]] and @data-tip="tooltip"]');
     });
 });
