@@ -63,8 +63,6 @@ const GUIComponent = props => {
         authorUsername,
         basePath,
         backdropLibraryVisible,
-        backpackHost,
-        backpackVisible,
         blocksTabVisible,
         cardsVisible,
         canCreateNew,
