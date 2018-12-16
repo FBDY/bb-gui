@@ -21,7 +21,7 @@ describe('Working with the how-to library', () => {
         await driver.quit();
     });
 
-    test('Backpack is "Coming Soon" without backpack host param', async () => {
+    xtest('Backpack is "Coming Soon" without backpack host param', async () => {
         await loadUri(uri);
         // Check that the backpack header is visible and wrapped in a coming soon tooltip
         await clickText('Backpack', '*[@data-for="backpack-tooltip"]');
@@ -29,7 +29,7 @@ describe('Working with the how-to library', () => {
         await expect(logs).toEqual([]);
     });
 
-    test('Backpack can be expanded with backpack host param', async () => {
+    xtest('Backpack can be expanded with backpack host param', async () => {
         await loadUri(`${uri}?backpack_host=some-value`);
 
         // Try activating the backpack from the costumes tab to make sure it isn't pushed off
