@@ -48,7 +48,7 @@ describe('Menu bar settings', () => {
         await findByXpath('//*[li[span[text()="Save to your computer"]] and not(@data-tip="tooltip")]');
     });
 
-    test('Share button should NOT be enabled', async () => {
+    xtest('Share button should NOT be enabled', async () => {
         await loadUri(uri);
         await findByXpath('//div[span[div[span[text()="Share"]]] and @data-tip="tooltip"]');
     });
