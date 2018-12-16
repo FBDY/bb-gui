@@ -41,7 +41,7 @@ const messages = defineMessages({
     defaultProjectTitle: {
         id: 'gui.gui.defaultProjectTitle',
         description: 'Default title for project',
-        defaultMessage: 'Scratch Project'
+        defaultMessage: 'BBGE Project'
     }
 });
 
@@ -61,7 +61,7 @@ class GUI extends React.Component {
     setReduxTitle (newTitle) {
         if (newTitle === null || typeof newTitle === 'undefined') {
             this.props.onUpdateReduxProjectTitle(
-                this.props.intl.formatMessage(messages.defaultProjectTitle)
+                messages.defaultProjectTitle.defaultMessage
             );
         } else {
             this.props.onUpdateReduxProjectTitle(newTitle);
