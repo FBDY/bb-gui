@@ -17,6 +17,7 @@ import monitorLayoutReducer, {monitorLayoutInitialState} from './monitor-layout'
 import projectChangedReducer, {projectChangedInitialState} from './project-changed';
 import projectStateReducer, {projectStateInitialState} from './project-state';
 import projectTitleReducer, {projectTitleInitialState} from './project-title';
+import fontsLoadedReducer, {fontsLoadedInitialState} from './fonts-loaded';
 import restoreDeletionReducer, {restoreDeletionInitialState} from './restore-deletion';
 import stageSizeReducer, {stageSizeInitialState} from './stage-size';
 import targetReducer, {targetsInitialState} from './targets';
@@ -50,6 +51,7 @@ const guiInitialState = {
     projectChanged: projectChangedInitialState,
     projectState: projectStateInitialState,
     projectTitle: projectTitleInitialState,
+    fontsLoaded: fontsLoadedInitialState,
     restoreDeletion: restoreDeletionInitialState,
     targets: targetsInitialState,
     timeout: timeoutInitialState,
@@ -120,7 +122,19 @@ const initPreviewInfo = function (currentState) {
         currentState,
         {
             modals: {
-                previewInfo: false
+                previewInfo: false // this key must match `MODAL_PREVIEW_INFO` in modals.js
+            }
+        }
+    );
+};
+
+const initTelemetryModal = function (currentState) {
+    return Object.assign(
+        {},
+        currentState,
+        {
+            modals: {
+                telemetryModal: true // this key must match `MODAL_TELEMETRY` in modals.js
             }
         }
     );
@@ -146,6 +160,7 @@ const guiReducer = combineReducers({
     projectChanged: projectChangedReducer,
     projectState: projectStateReducer,
     projectTitle: projectTitleReducer,
+    fontsLoaded: fontsLoadedReducer,
     restoreDeletion: restoreDeletionReducer,
     targets: targetReducer,
     timeout: timeoutReducer,
@@ -162,5 +177,6 @@ export {
     initFullScreen,
     initPlayer,
     initPreviewInfo,
+    initTelemetryModal,
     initTutorialCard
 };
