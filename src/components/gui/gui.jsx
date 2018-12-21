@@ -78,6 +78,7 @@ const GUIComponent = props => {
         enableCommunity,
         importInfoVisible,
         intl,
+        isCreating,
         isPlayerOnly,
         isRtl,
         isShared,
@@ -92,6 +93,7 @@ const GUIComponent = props => {
         onActivateCostumesTab,
         onActivateSoundsTab,
         onActivateTab,
+        onClickLogo,
         onExtensionButtonClick,
         onRequestCloseBackdropLibrary,
         onRequestCloseCostumeLibrary,
@@ -149,6 +151,9 @@ const GUIComponent = props => {
                 {loading ? (
                     <Loader />
                 ) : null}
+                {isCreating ? (
+                    <Loader messageId="gui.loader.creating" />
+                ) : null}
                 {importInfoVisible ? (
                     <ImportModal />
                 ) : null}
@@ -198,6 +203,7 @@ const GUIComponent = props => {
                     renderLogin={renderLogin}
                     showComingSoon={showComingSoon}
                     onClickAccountNav={onClickAccountNav}
+                    onClickLogo={onClickLogo}
                     onCloseAccountNav={onCloseAccountNav}
                     onLogOut={onLogOut}
                     onOpenRegistration={onOpenRegistration}
@@ -351,6 +357,7 @@ GUIComponent.propTypes = {
     enableCommunity: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
     intl: intlShape.isRequired,
+    isCreating: PropTypes.bool,
     isPlayerOnly: PropTypes.bool,
     isRtl: PropTypes.bool,
     isShared: PropTypes.bool,
@@ -359,6 +366,7 @@ GUIComponent.propTypes = {
     onActivateSoundsTab: PropTypes.func,
     onActivateTab: PropTypes.func,
     onClickAccountNav: PropTypes.func,
+    onClickLogo: PropTypes.func,
     onCloseAccountNav: PropTypes.func,
     onExtensionButtonClick: PropTypes.func,
     onLogOut: PropTypes.func,
@@ -391,7 +399,9 @@ GUIComponent.defaultProps = {
     canShare: false,
     canUseCloud: false,
     enableCommunity: false,
+    isCreating: false,
     isShared: false,
+    loading: false,
     onUpdateProjectTitle: () => {},
     showComingSoon: false,
     stageSizeMode: STAGE_SIZE_MODES.large

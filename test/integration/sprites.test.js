@@ -86,7 +86,7 @@ describe('Working with sprites', () => {
 
     // This test fails because uploading an SVG as a sprite changes the scaling
     // Enable when this is fixed issues/3608
-    test.skip('Adding a sprite by uploading an svg (gh-3608)', async () => {
+    test('Adding a sprite by uploading an svg (gh-3608)', async () => {
         await loadUri(uri);
         const el = await findByXpath('//button[@aria-label="Choose a Sprite"]');
         await driver.actions().mouseMove(el)

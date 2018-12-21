@@ -35,6 +35,7 @@ deploy:
     - master
     - develop
     - smoke
+    condition: $TRAVIS_EVENT_TYPE != cron
   skip_cleanup: true
   email: $NPM_EMAIL
   api_key: $NPM_TOKEN
@@ -42,10 +43,18 @@ deploy:
 - provider: script
   on:
     all_branches: true
+    condition: $TRAVIS_EVENT_TYPE != cron
   skip_cleanup: true
   script: npm run deploy -- -x -e $TRAVIS_BRANCH -r https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
 - provider: script
   on:
     all_branches: true
+    condition: $TRAVIS_EVENT_TYPE != cron
   script: npm run prune -- https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
 
+- provider: script
+  on:
+    branch: develop
+    condition: $TRAVIS_EVENT_TYPE == cron
+  skip_cleanup: true
+  script: npm run i18n:src && npm run i18n:push
