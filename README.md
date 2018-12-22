@@ -1,6 +1,6 @@
 # bb-gui
 
-[![Build Status](https://travis-ci.org/FBDY/bb-gui.svg?branch=develop)](https://travis-ci.org/FBDY/bb-gui) [![Greenkeeper badge](https://badges.greenkeeper.io/FBDY/bb-gui.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/FBDY/bb-gui.svg?branch=develop)](https://travis-ci.org/FBDY/bb-gui)
 
 ## Installation
 This requires you to have Git and Node.js installed.
