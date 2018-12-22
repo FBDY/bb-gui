@@ -122,7 +122,6 @@ describe('Working with sprites', () => {
     test('Use browser back button to close library', async () => {
         await driver.get('https://www.google.com');
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickText('Costumes');
         await clickXpath('//button[@aria-label="Choose a Sprite"]');
         const abbyElement = await findByText('Abby'); // Should show editor for new costume
