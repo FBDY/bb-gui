@@ -56,7 +56,6 @@ describe('Menu bar settings', () => {
 
     test('Logo should be clickable', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
         await clickXpath('//img[@alt="Scratch"]');
         const currentUrl = await driver.getCurrentUrl();
         await expect(currentUrl).toEqual('https://scratch.mit.edu/');
@@ -64,10 +63,9 @@ describe('Menu bar settings', () => {
 
     test('(GH#4064) Project name should be editable', async () => {
         await loadUri(uri);
-        await clickXpath('//button[@title="Try It"]');
-        const el = await findByXpath('//input[@value="Scratch Project"]');
+        const el = await findByXpath('//input[@value="BBGE Project"]');
         await el.sendKeys(' - Personalized');
         await clickText('Costumes'); // just to blur the input
-        await clickXpath('//input[@value="Scratch Project - Personalized"]');
+        await clickXpath('//input[@value="BBGE Project - Personalized"]');
     });
 });
