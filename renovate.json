@@ -11,6 +11,7 @@
     ":ignoreModulesAndTests",
     ":maintainLockFilesDisabled",
     ":preserveSemverRanges",
+    ":disableRateLimiting",
     "group:monorepos",
     "group:recommended",
     "helpers:disableTypesNodeMajor"
