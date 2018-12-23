@@ -1,8 +1,8 @@
-$ui-primary: hsla(215, 100%, 95%, 1); /* #E5F0FF */
-$ui-secondary: hsla(215, 75%, 95%, 1); /* #E9F1FC */
-$ui-tertiary: hsla(215, 50%, 90%, 1); /* #D9E3F2 */
+$ui-primary: hsla(250, 100%, 95%, 1); /* #EAE5FF */
+$ui-secondary: hsla(250, 75%, 95%, 1); /* #ECE9FC */
+$ui-tertiary: hsla(250, 50%, 90%, 1); /* #DDD9F2 */
 
-$ui-modal-overlay: hsla(215, 100%, 65%, 0.9); /* 90% transparent version of motion-primary */
+$ui-modal-overlay: hsla(250, 100%, 65%, 0.9); /* 90% transparent version of motion-primary */
 
 $ui-white: hsla(0, 100%, 100%, 1); /* #FFFFFF */
 $ui-white-dim: hsla(0, 100%, 100%, 0.75); /* 25% transparent version of ui-white */
@@ -14,10 +14,10 @@ $ui-black-transparent: hsla(0, 0%, 0%, 0.15); /* 15% transparent version of blac
 $text-primary: hsla(225, 15%, 40%, 1); /* #575E75 */
 $text-primary-transparent: hsla(225, 15%, 40%, 0.75);
 
-$motion-primary: hsla(215, 100%, 65%, 1); /* #4C97FF */
-$motion-tertiary: hsla(215, 60%, 50%, 1); /* #3373CC */
-$motion-transparent: hsla(215, 100%, 65%, 0.35); /* 35% transparent version of motion-primary */
-$motion-light-transparent: hsla(215, 100%, 65%, 0.1); /* 10% transparent version of motion-primary */
+$motion-primary: hsla(250, 100%, 65%, 1); /* #6A4DFF */
+$motion-tertiary: hsla(250, 60%, 50%, 1); /* #4C33CC */
+$motion-transparent: hsla(250, 100%, 65%, 0.35); /* 35% transparent version of motion-primary */
+$motion-light-transparent: hsla(250, 100%, 65%, 0.1); /* 10% transparent version of motion-primary */
 
 $red-primary: hsla(20, 100%, 55%, 1); /* #FF661A */
 $red-tertiary: hsla(20, 100%, 45%, 1); /* #E64D00 */
