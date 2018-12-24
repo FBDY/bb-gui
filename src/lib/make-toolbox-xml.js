@@ -345,6 +345,11 @@ const events = function (isStage) {
         ${blockSeparator}
         <block type="event_whenbroadcastreceived">
         </block>
+        <block type="event_sendmsg">
+            <value name="MESSAGE">
+                <shadow type="event_broadcast_menu"></shadow>
+            </value>
+        </block>
         <block type="event_broadcast">
             <value name="BROADCAST_INPUT">
                 <shadow type="event_broadcast_menu"></shadow>
