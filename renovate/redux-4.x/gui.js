@@ -45,7 +45,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 
 var onClickLogo = function onClickLogo() {
-  window.location = 'https://scratch.mit.edu';
+  window.location = 'https://github.com/FBDY/';
 };
 
 var handleTelemetryModalCancel = function handleTelemetryModalCancel() {
