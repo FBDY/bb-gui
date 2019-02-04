@@ -141,6 +141,10 @@ export default function (vm) {
         return [[myself, '_myself_']].concat(spriteMenu());
     };
 
+    const sendmsgTargetMenu = function () {
+        spriteMenu();
+    };
+
     const soundColors = ScratchBlocks.Colours.sounds;
 
     const looksColors = ScratchBlocks.Colours.looks;
@@ -292,6 +296,11 @@ export default function (vm) {
 
     ScratchBlocks.Blocks.control_create_clone_of_menu.init = function () {
         const json = jsonForMenuBlock('CLONE_OPTION', cloneMenu, controlColors, []);
+        this.jsonInit(json);
+    };
+
+    ScratchBlocks.Blocks.event_sendmsg_target_menu.init = function () {
+        const json = jsonForMenuBlock('SENDMSG_TARGET', sendmsgTargetMenu, eventColors, []);
         this.jsonInit(json);
     };
 

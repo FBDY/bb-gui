@@ -352,6 +352,14 @@ const events = function (isStage) {
               <shadow type="event_broadcast_menu"></shadow>
             </value>
         </block>
+        <block type="event_sendmsg">
+            <value name="SENDMSG_MSG">
+                <shadow type="event_broadcast_menu"></shadow>
+            </value>
+            <value name="SENDMSG_TARGET">
+                <shadow type="event_sendmsg_target_menu"></shadow>
+            </value>
+        </block>
         ${categorySeparator}
     </category>
     `;
