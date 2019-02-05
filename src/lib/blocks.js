@@ -142,7 +142,8 @@ export default function (vm) {
     };
 
     const sendmsgTargetMenu = function () {
-        spriteMenu();
+        const myself = ScratchBlocks.ScratchMsgs.translate('CONTROL_CREATECLONEOF_MYSELF', 'myself');
+        return [[myself, '_myself_']].concat(spriteMenu());
     };
 
     const soundColors = ScratchBlocks.Colours.sounds;
