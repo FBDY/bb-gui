@@ -146,6 +146,15 @@ export default function (vm) {
         return [[myself, '_myself_']].concat(spriteMenu());
     };
 
+    const cloneNameMenu = function () {
+        /*
+         * WIP
+         * The following code is just placeholder to keep the GUI from crashing.
+         * TODO: Implement the actual mechanism.
+         */
+        return cloneMenu();
+    }
+
     const soundColors = ScratchBlocks.Colours.sounds;
 
     const looksColors = ScratchBlocks.Colours.looks;
@@ -306,6 +315,11 @@ export default function (vm) {
         ]);
         this.jsonInit(json);
     };
+
+    ScratchBlocks.Blocks.control_clone_name_menu.init = function () {
+        const json = jsonForMenuBlock('CLONE_NAME', cloneNameMenu, controlColors, []);
+        this.jsonInit(json);
+    }
 
     ScratchBlocks.Blocks.control_create_clone_of_menu.init = function () {
         const json = jsonForMenuBlock('CLONE_OPTION', cloneMenu, controlColors, []);
