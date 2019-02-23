@@ -47,6 +47,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         constructor (props) {
             super(props);
             bindAll(this, [
+                'getProjectThumbnail',
                 'leavePageConfirm',
                 'tryToAutoSave'
             ]);
@@ -57,6 +58,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 // but then it'd be hard to turn this listening off in our tests
                 window.onbeforeunload = e => this.leavePageConfirm(e);
             }
+            this.props.onSetProjectThumbnailer(this.getProjectThumbnail);
         }
         componentDidUpdate (prevProps) {
             if (this.props.projectChanged && !prevProps.projectChanged) {
@@ -104,6 +106,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
             // i.e. if another of this component has been mounted before this one gets unmounted
             // which happens when going from project to editor view.
             // window.onbeforeunload = undefined; // eslint-disable-line no-undefined
+            // Remove project thumbnailer function since the components are unmounting
+            this.props.onSetProjectThumbnailer(null);
         }
         leavePageConfirm (e) {
             if (this.props.projectChanged) {
@@ -201,6 +205,13 @@ const ProjectSaverHOC = function (WrappedComponent) {
         storeProject (projectId, requestParams) {
             requestParams = requestParams || {};
             this.clearAutoSaveTimeout();
+            // Serialize VM state now before embarking on
+            // the asynchronous journey of storing assets to
+            // the server. This ensures that assets don't update
+            // while in the process of saving a project (e.g. the
+            // serialized project refers to a newer asset than what
+            // we just finished saving).
+            const savedVMState = this.props.vm.toJSON();
             return Promise.all(this.props.vm.assets
                 .filter(asset => !asset.clean)
                 .map(
@@ -215,7 +226,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 )
             ).then(() => {
                 const opts = {
-                    body: this.props.vm.toJSON(),
+                    body: savedVMState,
                     // If we set json:true then the body is double-stringified, so don't
                     headers: {
                         'Content-Type': 'application/json'
@@ -275,18 +286,23 @@ const ProjectSaverHOC = function (WrappedComponent) {
          */
         storeProjectThumbnail (projectId) {
             try {
-                this.props.vm.postIOData('video', {forceTransparentPreview: true});
-                this.props.vm.renderer.requestSnapshot(dataURI => {
-                    this.props.vm.postIOData('video', {forceTransparentPreview: false});
-                    this.props.onUpdateProjectThumbnail(
-                        projectId, dataURItoBlob(dataURI));
+                this.getProjectThumbnail(dataURI => {
+                    this.props.onUpdateProjectThumbnail(projectId, dataURItoBlob(dataURI));
                 });
-                this.props.vm.renderer.draw();
             } catch (e) {
                 log.error('Project thumbnail save error', e);
                 // This is intentionally fire/forget because a failure
                 // to save the thumbnail is not vitally important to the user.
             }
+        }
+
+        getProjectThumbnail (callback) {
+            this.props.vm.postIOData('video', {forceTransparentPreview: true});
+            this.props.vm.renderer.requestSnapshot(dataURI => {
+                this.props.vm.postIOData('video', {forceTransparentPreview: false});
+                callback(dataURI);
+            });
+            this.props.vm.renderer.draw();
         }
 
         render () {
@@ -311,6 +327,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 onProjectError,
                 onRemixing,
                 onSetProjectUnchanged,
+                onSetProjectThumbnailer,
                 onShowAlert,
                 onShowCopySuccessAlert,
                 onShowRemixSuccessAlert,
@@ -371,7 +388,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
     };
     ProjectSaverComponent.defaultProps = {
         autoSaveIntervalSecs: 120,
-        onRemixing: () => {}
+        onRemixing: () => {},
+        onSetProjectThumbnailer: () => {}
     };
     const mapStateToProps = (state, ownProps) => {
         const loadingState = state.scratchGui.projectState.loadingState;
