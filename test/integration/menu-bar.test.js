@@ -4,9 +4,13 @@ import SeleniumHelper from '../helpers/selenium-helper';
 const {
     clickText,
     clickXpath,
+    findByText,
     findByXpath,
     getDriver,
-    loadUri
+    loadUri,
+    rightClickText,
+    scope,
+    waitUntilGone
 } = new SeleniumHelper();
 
 const uri = path.resolve(__dirname, '../../build/index.html');
@@ -58,7 +62,7 @@ describe('Menu bar settings', () => {
         await loadUri(uri);
         await clickXpath('//img[@alt="Scratch"]');
         const currentUrl = await driver.getCurrentUrl();
-        await expect(currentUrl).toEqual('https://scratch.mit.edu/');
+        await expect(currentUrl).toEqual('https://github.com/FBDY/');
     });
 
     test('(GH#4064) Project name should be editable', async () => {
@@ -67,5 +71,31 @@ describe('Menu bar settings', () => {
         await el.sendKeys(' - Personalized');
         await clickText('Costumes'); // just to blur the input
         await clickXpath('//input[@value="BBGE Project - Personalized"]');
+    });
+
+    test('User is not warned before uploading project file over a fresh project', async () => {
+        await loadUri(uri);
+        await clickText('File');
+        const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/project1.sb3'));
+        await waitUntilGone(findByText('Loading'));
+        // No replace alert since no changes were made
+        await findByText('project1-sprite');
+    });
+
+    test('User is warned before uploading project file over an edited project', async () => {
+        await loadUri(uri);
+
+        // Change the project by deleting a sprite
+        await rightClickText('Sprite1', scope.spriteTile);
+        await clickText('delete', scope.spriteTile);
+
+        await clickText('File');
+        const input = await findByXpath('//input[@accept=".sb,.sb2,.sb3"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/project1.sb3'));
+        await driver.switchTo().alert()
+            .accept();
+        await waitUntilGone(findByText('Loading'));
+        await findByText('project1-sprite');
     });
 });

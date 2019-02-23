@@ -10,6 +10,7 @@ env:
   - NODE_ENV=production
   - SMOKE_URL=https://FBDY.github.io/bb-gui/$TRAVIS_PULL_REQUEST_BRANCH
   - NPM_TAG=latest
+  - RELEASE_VERSION="0.1.0-prerelease.$(date +'%Y%m%d%H%M%S')"
 cache:
   directories:
   - node_modules
@@ -22,8 +23,8 @@ script:
 before_deploy:
 - >
   if [ -z "$BEFORE_DEPLOY_RAN" ]; then
-    npm --no-git-tag-version version 0.1.0-prerelease.$(date +%Y%m%d%H%M%S)
-    if [ "$TRAVIS_BRANCH" == "develop" ]; then export NPM_TAG=develop; fi
+    npm --no-git-tag-version version $RELEASE_VERSION
+    if [ "$TRAVIS_BRANCH" == "master" ]; then export NPM_TAG=stable; fi
     git config --global user.email $(git log --pretty=format:"%ae" -n1)
     git config --global user.name $(git log --pretty=format:"%an" -n1)
     export BEFORE_DEPLOY_RAN=true
@@ -51,10 +52,3 @@ deploy:
     all_branches: true
     condition: $TRAVIS_EVENT_TYPE != cron
   script: npm run prune -- https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
-
-- provider: script
-  on:
-    branch: develop
-    condition: $TRAVIS_EVENT_TYPE == cron
-  skip_cleanup: true
-  script: npm run i18n:src && npm run i18n:push
