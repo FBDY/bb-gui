@@ -237,7 +237,7 @@ describe('Working with the blocks', () => {
     });
 
     // Regression test for switching between editor/player causing toolbox to stop updating
-    test('"See inside" after being on project page re-initializing variables', async () => {
+    xtest('"See inside" after being on project page re-initializing variables', async () => {
         const playerUri = path.resolve(__dirname, '../../build/player.html');
         await loadUri(playerUri);
         await clickText('See inside');
