@@ -6,9 +6,12 @@ import {defineMessages, injectIntl, intlShape} from 'react-intl';
 
 import analytics from '../lib/analytics';
 import log from '../lib/log';
+import sharedMessages from '../lib/shared-messages';
+
 import {
     LoadingStates,
     getIsLoadingUpload,
+    getIsShowingWithoutId,
     onLoadedProject,
     requestProjectUpload
 } from '../reducers/project-state';
@@ -80,17 +83,33 @@ class SBFileUploader extends React.Component {
     }
     getProjectTitleFromFilename (fileInputFilename) {
         if (!fileInputFilename) return '';
-        // only parse title from files like "filename.sb2" or "filename.sb3"
-        const matches = fileInputFilename.match(/^(.*)\.sb[23]$/);
+        // only parse title with valid scratch project extensions
+        // (.sb, .sb2, and .sb3)
+        const matches = fileInputFilename.match(/^(.*)\.sb[23]?$/);
         if (!matches) return '';
         return matches[1].substring(0, 100); // truncate project title to max 100 chars
     }
     // called when user has finished selecting a file to upload
     handleChange (e) {
+        const {
+            intl,
+            isShowingWithoutId,
+            loadingState,
+            projectChanged
+        } = this.props;
+
         const thisFileInput = e.target;
         if (thisFileInput.files) { // Don't attempt to load if no file was selected
             this.fileToUpload = thisFileInput.files[0];
-            this.props.requestProjectUpload(this.props.loadingState);
+
+            // Allow upload to continue only after confirmation if the project
+            // has changed and is not showing with ID. If it has an ID, this operation
+            // does not currently overwrite that project, so it is safe to do without confirmation.
+            const uploadAllowed = (isShowingWithoutId && projectChanged) ?
+                confirm(intl.formatMessage(sharedMessages.replaceProjectWarning)) : // eslint-disable-line no-alert
+                true;
+
+            if (uploadAllowed) this.props.requestProjectUpload(loadingState);
         }
     }
     // called when file upload raw data is available in the reader
@@ -106,7 +125,11 @@ class SBFileUploader extends React.Component {
                         nonInteraction: true
                     });
                     // Remove the hash if any (without triggering a hash change event or a reload)
-                    history.replaceState({}, document.title, '.');
+                    try { // Can fail e.g. when GUI is loaded from static file (integration tests)
+                        history.replaceState({}, document.title, '.');
+                    } catch {
+                        // No fallback, just do not trigger promise catch below
+                    }
                     this.props.onLoadingFinished(this.props.loadingState, true);
                     // Reset the file input after project is loaded
                     // This is necessary in case the user wants to reload a project
@@ -155,10 +178,12 @@ SBFileUploader.propTypes = {
     className: PropTypes.string,
     intl: intlShape.isRequired,
     isLoadingUpload: PropTypes.bool,
+    isShowingWithoutId: PropTypes.bool,
     loadingState: PropTypes.oneOf(LoadingStates),
     onLoadingFinished: PropTypes.func,
     onLoadingStarted: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
+    projectChanged: PropTypes.bool,
     requestProjectUpload: PropTypes.func,
     vm: PropTypes.shape({
         loadProject: PropTypes.func
@@ -171,7 +196,9 @@ const mapStateToProps = state => {
     const loadingState = state.scratchGui.projectState.loadingState;
     return {
         isLoadingUpload: getIsLoadingUpload(loadingState),
+        isShowingWithoutId: getIsShowingWithoutId(loadingState),
         loadingState: loadingState,
+        projectChanged: state.scratchGui.projectChanged,
         vm: state.scratchGui.vm
     };
 };

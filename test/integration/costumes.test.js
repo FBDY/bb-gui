@@ -4,6 +4,7 @@ import SeleniumHelper from '../helpers/selenium-helper';
 const {
     clickText,
     clickXpath,
+    findByText,
     findByXpath,
     getDriver,
     getLogs,
@@ -26,7 +27,12 @@ describe('Working with costumes', () => {
     });
 
     test('Adding a costume through the library', async () => {
+        // This is needed when running the tests all at once or it just fails...
+        await driver.quit();
+        driver = getDriver();
+
         await loadUri(uri);
+        await driver.sleep(500);
         await clickText('Costumes');
         await clickXpath('//button[@aria-label="Choose a Costume"]');
         const el = await findByXpath("//input[@placeholder='Search']");
@@ -142,6 +148,27 @@ describe('Working with costumes', () => {
         await expect(logs).toEqual([]);
     });
 
+    test('Adding several costumes with a gif', async () => {
+        await loadUri(uri);
+        await clickText('Costumes');
+        const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath('//input[@type="file"]');
+        await input.sendKeys(path.resolve(__dirname, '../fixtures/paddleball.gif'));
+
+        await findByText('paddleball', scope.costumesTab);
+        await findByText('paddleball2', scope.costumesTab);
+        await findByText('paddleball3', scope.costumesTab);
+        await findByText('paddleball4', scope.costumesTab);
+        await findByText('paddleball5', scope.costumesTab);
+        await findByText('paddleball6', scope.costumesTab);
+
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
     test('Adding a letter costume through the Letters filter in the library', async () => {
         await loadUri(uri);
         await driver.manage()
@@ -152,6 +179,42 @@ describe('Working with costumes', () => {
         await clickText('Letters');
         await clickText('Block-a', scope.modal); // Closes modal
         await rightClickText('Block-a', scope.costumesTab); // Make sure it is there
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    test('Costumes animate on mouseover', async () => {
+        await loadUri(uri);
+        await clickXpath('//button[@aria-label="Choose a Sprite"]');
+        const searchElement = await findByXpath("//input[@placeholder='Search']");
+        await searchElement.sendKeys('abb');
+        const abbyElement = await findByXpath('//*[span[text()="Abby"]]');
+        driver.actions()
+            .mouseMove(abbyElement)
+            .perform();
+        // wait for one of Abby's alternate costumes to appear
+        await findByXpath('//img[@src="https://cdn.assets.scratch.mit.edu/internalapi/asset/b6e23922f23b49ddc6f62f675e77417c.svg/get/"]');
+        const logs = await getLogs();
+        await expect(logs).toEqual([]);
+    });
+
+    test('Adding multiple costumes at the same time', async () => {
+        const files = [
+            path.resolve(__dirname, '../fixtures/gh-3582-png.png'),
+            path.resolve(__dirname, '../fixtures/100-100.svg')
+        ];
+        await loadUri(uri);
+        await clickText('Costumes');
+        const el = await findByXpath('//button[@aria-label="Choose a Costume"]');
+        await driver.actions().mouseMove(el)
+            .perform();
+        await driver.sleep(500); // Wait for thermometer menu to come up
+        const input = await findByXpath('//input[@type="file"]');
+        await input.sendKeys(files.join('\n'));
+
+        await findByText('gh-3582-png', scope.costumesTab);
+        await findByText('100-100', scope.costumesTab);
+
         const logs = await getLogs();
         await expect(logs).toEqual([]);
     });
