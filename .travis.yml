@@ -51,10 +51,3 @@ deploy:
     all_branches: true
     condition: $TRAVIS_EVENT_TYPE != cron
   script: npm run prune -- https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
-
-- provider: script
-  on:
-    branch: develop
-    condition: $TRAVIS_EVENT_TYPE == cron
-  skip_cleanup: true
-  script: npm run i18n:src && npm run i18n:push
