@@ -53,7 +53,8 @@ const SceneOutlinerItem = props => (
                 onClick={props.onDeleteButtonClick}
             />
         ) : null }
-        {props.onDuplicateButtonClick || props.onDeleteButtonClick || props.onExportButtonClick ? (
+        {props.onCloneButtonClick || props.onDuplicateButtonClick || props.onDeleteButtonClick ||
+                props.onExportButtonClick ? (
             <ContextMenu id={`${props.name}-${contextMenuId++}`}>
                 {props.onDuplicateButtonClick ? (
                     <MenuItem onClick={props.onDuplicateButtonClick}>
@@ -61,6 +62,15 @@ const SceneOutlinerItem = props => (
                             defaultMessage="duplicate"
                             description="Menu item to duplicate in the right click menu"
                             id="gui.spriteSelectorItem.contextMenuDuplicate"
+                        />
+                    </MenuItem>
+                ) : null}
+                {props.onCloneButtonClick ? (
+                    <MenuItem onClick={props.onCloneButtonClick}>
+                        <FormattedMessage
+                            defaultMessage="clone"
+                            description="Menu item to create permanent clone in the right click menu"
+                            id="gui.spriteSelectorItem.contextMenuClone"
                         />
                     </MenuItem>
                 ) : null}
@@ -95,6 +105,7 @@ SceneOutlinerItem.propTypes = {
     name: PropTypes.string.isRequired,
     number: PropTypes.number,
     onClick: PropTypes.func,
+    onCloneButtonClick: PropTypes.func,
     onDeleteButtonClick: PropTypes.func,
     onDuplicateButtonClick: PropTypes.func,
     onExportButtonClick: PropTypes.func,

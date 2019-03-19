@@ -36,6 +36,7 @@ class TargetPane extends React.Component {
             'handleChangeSpriteVisibility',
             'handleChangeSpriteX',
             'handleChangeSpriteY',
+            'handleCloneSprite',
             'handleDeleteSprite',
             'handleDrop',
             'handleDuplicateSprite',
@@ -75,6 +76,9 @@ class TargetPane extends React.Component {
     }
     handleChangeSpriteY (y) {
         this.props.vm.postSpriteInfo({y});
+    }
+    handleCloneSprite (id) {
+        alert('not implemented yet!');
     }
     handleDeleteSprite (id) {
         const restoreSprite = this.props.vm.deleteSprite(id);
@@ -219,6 +223,7 @@ class TargetPane extends React.Component {
                 onChangeSpriteVisibility={this.handleChangeSpriteVisibility}
                 onChangeSpriteX={this.handleChangeSpriteX}
                 onChangeSpriteY={this.handleChangeSpriteY}
+                onCloneSprite={this.handleCloneSprite}
                 onDeleteSprite={this.handleDeleteSprite}
                 onDrop={this.handleDrop}
                 onDuplicateSprite={this.handleDuplicateSprite}

@@ -20,6 +20,7 @@ class SceneOutlinerItem extends React.PureComponent {
         bindAll(this, [
             'getCostumeData',
             'handleClick',
+            'handleClone',
             'handleDelete',
             'handleDuplicate',
             'handleExport',
@@ -89,6 +90,10 @@ class SceneOutlinerItem extends React.PureComponent {
         e.stopPropagation(); // To prevent from bubbling back to handleClick
         this.props.onDeleteButtonClick(this.props.id);
     }
+    handleClone (e) {
+        e.stopPropagation(); // To prevent from bubbling back to handleClick
+        this.props.onCloneButtonClick(this.props.id);
+    }
     handleDuplicate (e) {
         e.stopPropagation(); // To prevent from bubbling back to handleClick
         this.props.onDuplicateButtonClick(this.props.id);
@@ -111,6 +116,7 @@ class SceneOutlinerItem extends React.PureComponent {
             index,
             onClick,
             onDeleteButtonClick,
+            onCloneButtonClick,
             onDuplicateButtonClick,
             onExportButtonClick,
             dragPayload,
@@ -124,6 +130,7 @@ class SceneOutlinerItem extends React.PureComponent {
             <SceneOutlinerItemComponent
                 costumeURL={this.getCostumeData()}
                 onClick={this.handleClick}
+                onCloneButtonClick={onCloneButtonClick ? this.handleClone : null}
                 onDeleteButtonClick={onDeleteButtonClick ? this.handleDelete : null}
                 onDuplicateButtonClick={onDuplicateButtonClick ? this.handleDuplicate : null}
                 onExportButtonClick={onExportButtonClick ? this.handleExport : null}
@@ -147,6 +154,7 @@ SceneOutlinerItem.propTypes = {
     index: PropTypes.number,
     name: PropTypes.string,
     onClick: PropTypes.func,
+    onCloneButtonClick: PropTypes.func,
     onDeleteButtonClick: PropTypes.func,
     onDrag: PropTypes.func.isRequired,
     onDuplicateButtonClick: PropTypes.func,

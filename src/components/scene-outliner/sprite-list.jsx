@@ -18,6 +18,7 @@ const SpriteList = function (props) {
         draggingIndex,
         draggingType,
         hoveredTarget,
+        onCloneSprite,
         onDeleteSprite,
         onDuplicateSprite,
         onExportSprite,
@@ -83,6 +84,7 @@ const SpriteList = function (props) {
                             name={sprite.name}
                             selected={sprite.id === selectedId}
                             onClick={onSelectSprite}
+                            onCloneButtonClick={onCloneSprite}
                             onDeleteButtonClick={onDeleteSprite}
                             onDuplicateButtonClick={onDuplicateSprite}
                             onExportButtonClick={onExportSprite}
@@ -115,6 +117,7 @@ SpriteList.propTypes = {
         order: PropTypes.number.isRequired
     })),
     onAddSortable: PropTypes.func,
+    onCloneSprite: PropTypes.func,
     onDeleteSprite: PropTypes.func,
     onDuplicateSprite: PropTypes.func,
     onExportSprite: PropTypes.func,
