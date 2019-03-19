@@ -13,13 +13,6 @@
     flex-shrink: 0;
 }
 
-.sprite-selector-and-outliner {
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 1;
-    flex-grow: 1;
-}
-
 [dir="ltr"] .stage-selector-wrapper {
     margin-left: calc($space / 2);
 }

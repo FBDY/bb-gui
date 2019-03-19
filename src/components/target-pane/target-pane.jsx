@@ -4,7 +4,6 @@ import React from 'react';
 import VM from '@bbge/vm';
 
 import SpriteLibrary from '../../containers/sprite-library.jsx';
-import SpriteSelectorComponent from '../sprite-selector/sprite-selector.jsx';
 import SceneOutlinerComponent from '../scene-outliner/scene-outliner.jsx';
 import StageSelector from '../../containers/stage-selector.jsx';
 import {STAGE_DISPLAY_SIZES} from '../../lib/layout-constants';
@@ -53,62 +52,32 @@ const TargetPane = ({
         {...componentProps}
     >
 
-        <div
-            className={styles.spriteSelectorAndOutliner}
-        >
-            <SpriteSelectorComponent
-                editingTarget={editingTarget}
-                hoveredTarget={hoveredTarget}
-                raised={raiseSprites}
-                selectedId={editingTarget}
-                spriteFileInput={fileInputRef}
-                sprites={sprites}
-                stageSize={stageSize}
-                onChangeSpriteDirection={onChangeSpriteDirection}
-                onChangeSpriteName={onChangeSpriteName}
-                onChangeSpriteRotationStyle={onChangeSpriteRotationStyle}
-                onChangeSpriteSize={onChangeSpriteSize}
-                onChangeSpriteVisibility={onChangeSpriteVisibility}
-                onChangeSpriteX={onChangeSpriteX}
-                onChangeSpriteY={onChangeSpriteY}
-                onDeleteSprite={onDeleteSprite}
-                onDrop={onDrop}
-                onDuplicateSprite={onDuplicateSprite}
-                onExportSprite={onExportSprite}
-                onFileUploadClick={onFileUploadClick}
-                onNewSpriteClick={onNewSpriteClick}
-                onPaintSpriteClick={onPaintSpriteClick}
-                onSelectSprite={onSelectSprite}
-                onSpriteUpload={onSpriteUpload}
-                onSurpriseSpriteClick={onSurpriseSpriteClick}
-            />
-            <SceneOutlinerComponent
-                editingTarget={editingTarget}
-                hoveredTarget={hoveredTarget}
-                raised={raiseSprites}
-                selectedId={editingTarget}
-                spriteFileInput={fileInputRef}
-                sprites={sprites}
-                stageSize={stageSize}
-                onChangeSpriteDirection={onChangeSpriteDirection}
-                onChangeSpriteName={onChangeSpriteName}
-                onChangeSpriteRotationStyle={onChangeSpriteRotationStyle}
-                onChangeSpriteSize={onChangeSpriteSize}
-                onChangeSpriteVisibility={onChangeSpriteVisibility}
-                onChangeSpriteX={onChangeSpriteX}
-                onChangeSpriteY={onChangeSpriteY}
-                onDeleteSprite={onDeleteSprite}
-                onDrop={onDrop}
-                onDuplicateSprite={onDuplicateSprite}
-                onExportSprite={onExportSprite}
-                onFileUploadClick={onFileUploadClick}
-                onNewSpriteClick={onNewSpriteClick}
-                onPaintSpriteClick={onPaintSpriteClick}
-                onSelectSprite={onSelectSprite}
-                onSpriteUpload={onSpriteUpload}
-                onSurpriseSpriteClick={onSurpriseSpriteClick}
-            />
-        </div>
+        <SceneOutlinerComponent
+            editingTarget={editingTarget}
+            hoveredTarget={hoveredTarget}
+            raised={raiseSprites}
+            selectedId={editingTarget}
+            spriteFileInput={fileInputRef}
+            sprites={sprites}
+            stageSize={stageSize}
+            onChangeSpriteDirection={onChangeSpriteDirection}
+            onChangeSpriteName={onChangeSpriteName}
+            onChangeSpriteRotationStyle={onChangeSpriteRotationStyle}
+            onChangeSpriteSize={onChangeSpriteSize}
+            onChangeSpriteVisibility={onChangeSpriteVisibility}
+            onChangeSpriteX={onChangeSpriteX}
+            onChangeSpriteY={onChangeSpriteY}
+            onDeleteSprite={onDeleteSprite}
+            onDrop={onDrop}
+            onDuplicateSprite={onDuplicateSprite}
+            onExportSprite={onExportSprite}
+            onFileUploadClick={onFileUploadClick}
+            onNewSpriteClick={onNewSpriteClick}
+            onPaintSpriteClick={onPaintSpriteClick}
+            onSelectSprite={onSelectSprite}
+            onSpriteUpload={onSpriteUpload}
+            onSurpriseSpriteClick={onSurpriseSpriteClick}
+        />
         <div className={styles.stageSelectorWrapper}>
             {stage.id && <StageSelector
                 asset={
