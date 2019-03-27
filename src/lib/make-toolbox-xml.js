@@ -424,7 +424,20 @@ const control = function (isStage) {
             </block>
         ` : `
             <block type="control_start_as_clone"/>
+            <block type="control_start_as_named_clone">
+                <value name="CLONE_NAME">
+                    <shadow type="control_clone_name_menu"/>
+                </value>
+            </block>
             <block type="control_create_clone_of">
+                <value name="CLONE_OPTION">
+                    <shadow type="control_create_clone_of_menu"/>
+                </value>
+            </block>
+            <block type="control_create_named_clone_of">
+                <value name="CLONE_NAME">
+                    <shadow type="control_clone_name_menu"/>
+                </value>
                 <value name="CLONE_OPTION">
                     <shadow type="control_create_clone_of_menu"/>
                 </value>
