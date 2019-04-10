@@ -10,7 +10,6 @@ import Box from '../box/box.jsx';
 import Button from '../button/button.jsx';
 import {ComingSoonTooltip} from '../coming-soon/coming-soon.jsx';
 import Divider from '../divider/divider.jsx';
-import LanguageSelector from '../../containers/language-selector.jsx';
 import SaveStatus from './save-status.jsx';
 import SBFileUploader from '../../containers/sb-file-uploader.jsx';
 import MenuBarMenu from './menu-bar-menu.jsx';
@@ -42,9 +41,6 @@ import {
     openEditMenu,
     closeEditMenu,
     editMenuOpen,
-    openLanguageMenu,
-    closeLanguageMenu,
-    languageMenuOpen,
     openLoginMenu,
     closeLoginMenu,
     loginMenuOpen
@@ -54,19 +50,12 @@ import styles from './menu-bar.css';
 
 import helpIcon from '../../lib/assets/icon--tutorials.svg';
 import feedbackIcon from './icon--feedback.svg';
-import dropdownCaret from './dropdown-caret.svg';
-import languageIcon from '../language-selector/language-icon.svg';
 
 import scratchLogo from './scratch-logo.svg';
 
 import sharedMessages from '../../lib/shared-messages';
 
 const ariaMessages = defineMessages({
-    language: {
-        id: 'gui.menuBar.LanguageSelector',
-        defaultMessage: 'language selector',
-        description: 'accessibility text for the language selection menu'
-    },
     tutorials: {
         id: 'gui.menuBar.tutorialsLibrary',
         defaultMessage: 'Tutorials',
@@ -140,7 +129,6 @@ class MenuBar extends React.Component {
             'handleClickShare',
             'handleCloseFileMenuAndThen',
             'handleKeyPress',
-            'handleLanguageMouseUp',
             'handleRestoreOption',
             'restoreOptionMessage'
         ]);
@@ -221,11 +209,6 @@ class MenuBar extends React.Component {
             event.preventDefault();
         }
     }
-    handleLanguageMouseUp (e) {
-        if (!this.props.languageMenuOpen) {
-            this.props.onClickLanguage(e);
-        }
-    }
     restoreOptionMessage (deletedItem) {
         switch (deletedItem) {
         case 'Sprite':
@@ -303,21 +286,6 @@ class MenuBar extends React.Component {
                                 src={scratchLogo}
                                 onClick={this.props.onClickLogo}
                             />
-                        </div>
-                        <div
-                            className={classNames(styles.menuBarItem, styles.hoverable, styles.languageMenu)}
-                        >
-                            <div>
-                                <img
-                                    className={styles.languageIcon}
-                                    src={languageIcon}
-                                />
-                                <img
-                                    className={styles.languageCaret}
-                                    src={dropdownCaret}
-                                />
-                            </div>
-                            <LanguageSelector label={this.props.intl.formatMessage(ariaMessages.language)} />
                         </div>
                         <div
                             className={classNames(styles.menuBarItem, styles.hoverable, {
@@ -537,12 +505,10 @@ MenuBar.propTypes = {
     isShared: PropTypes.bool,
     isShowingProject: PropTypes.bool,
     isUpdating: PropTypes.bool,
-    languageMenuOpen: PropTypes.bool,
     loginMenuOpen: PropTypes.bool,
     onClickAccount: PropTypes.func,
     onClickEdit: PropTypes.func,
     onClickFile: PropTypes.func,
-    onClickLanguage: PropTypes.func,
     onClickLogin: PropTypes.func,
     onClickLogo: PropTypes.func,
     onClickNew: PropTypes.func,
@@ -555,7 +521,6 @@ MenuBar.propTypes = {
     onRequestCloseAccount: PropTypes.func,
     onRequestCloseEdit: PropTypes.func,
     onRequestCloseFile: PropTypes.func,
-    onRequestCloseLanguage: PropTypes.func,
     onRequestCloseLogin: PropTypes.func,
     onSeeCommunity: PropTypes.func,
     onShare: PropTypes.func,
@@ -583,7 +548,6 @@ const mapStateToProps = state => {
         isRtl: state.locales.isRtl,
         isUpdating: getIsUpdating(loadingState),
         isShowingProject: getIsShowingProject(loadingState),
-        languageMenuOpen: languageMenuOpen(state),
         loginMenuOpen: loginMenuOpen(state),
         projectChanged: state.scratchGui.projectChanged,
         projectTitle: state.scratchGui.projectTitle,
@@ -601,8 +565,6 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseFile: () => dispatch(closeFileMenu()),
     onClickEdit: () => dispatch(openEditMenu()),
     onRequestCloseEdit: () => dispatch(closeEditMenu()),
-    onClickLanguage: () => dispatch(openLanguageMenu()),
-    onRequestCloseLanguage: () => dispatch(closeLanguageMenu()),
     onClickLogin: () => dispatch(openLoginMenu()),
     onRequestCloseLogin: () => dispatch(closeLoginMenu()),
     onClickNew: needSave => dispatch(requestNewProject(needSave)),

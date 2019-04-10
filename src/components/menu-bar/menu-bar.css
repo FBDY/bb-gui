@@ -49,21 +49,6 @@
     cursor: pointer;
 }
 
-.language-icon {
-    height:  1.5rem;
-    vertical-align: middle;
-}
-
-.language-caret {
-    margin: 0 .125rem;
-}
-
-.language-menu {
-    box-sizing: border-box;
-    display: inline-flex;
-    width: $language-selector-width;
-}
-
 .menu-bar-item {
     display: flex;
     padding: 0 0.25rem;
@@ -104,10 +89,6 @@
 
 .file-group .menu-bar-item {
     padding: 0 0.75rem;
-}
-
-.menu-bar-item.language-menu {
-    padding: 0 0.5rem;
 }
 
 .menu-bar-menu {
