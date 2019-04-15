@@ -22,8 +22,6 @@ import CostumeLibrary from '../../containers/costume-library.jsx';
 import BackdropLibrary from '../../containers/backdrop-library.jsx';
 import Watermark from '../../containers/watermark.jsx';
 
-import PreviewModal from '../../containers/preview-modal.jsx';
-import ImportModal from '../../containers/import-modal.jsx';
 import WebGlModal from '../../containers/webgl-modal.jsx';
 import TipsLibrary from '../../containers/tips-library.jsx';
 import Cards from '../../containers/cards.jsx';
@@ -77,9 +75,9 @@ const GUIComponent = props => {
         costumeLibraryVisible,
         costumesTabVisible,
         enableCommunity,
-        importInfoVisible,
         intl,
         isCreating,
+        isFullScreen,
         isPlayerOnly,
         isRtl,
         isShared,
@@ -104,7 +102,6 @@ const GUIComponent = props => {
         onTelemetryModalCancel,
         onTelemetryModalOptIn,
         onTelemetryModalOptOut,
-        previewInfoVisible,
         showComingSoon,
         soundsTabVisible,
         stageSizeMode,
@@ -136,8 +133,10 @@ const GUIComponent = props => {
 
         return isPlayerOnly ? (
             <StageWrapper
+                isFullScreen={isFullScreen}
                 isRendererSupported={isRendererSupported}
                 isRtl={isRtl}
+                loading={loading}
                 stageSize={STAGE_SIZE_MODES.large}
                 vm={vm}
             >
@@ -151,9 +150,6 @@ const GUIComponent = props => {
                 dir={isRtl ? 'rtl' : 'ltr'}
                 {...componentProps}
             >
-                {previewInfoVisible ? (
-                    <PreviewModal />
-                ) : null}
                 {telemetryModalVisible ? (
                     <TelemetryModal
                         onCancel={onTelemetryModalCancel}
@@ -167,9 +163,6 @@ const GUIComponent = props => {
                 ) : null}
                 {isCreating ? (
                     <Loader messageId="gui.loader.creating" />
-                ) : null}
-                {importInfoVisible ? (
-                    <ImportModal />
                 ) : null}
                 {isRendererSupported ? null : (
                     <WebGlModal isRtl={isRtl} />
@@ -328,6 +321,7 @@ const GUIComponent = props => {
                         <Box className={classNames(styles.stageAndTargetWrapper, styles[stageSize])}>
                             <StageWrapper
                                 isRendererSupported={isRendererSupported}
+                                isRtl={isRtl}
                                 stageSize={stageSize}
                                 vm={vm}
                             />
@@ -353,8 +347,6 @@ GUIComponent.propTypes = {
     authorThumbnailUrl: PropTypes.string,
     authorUsername: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]), // can be false
     backdropLibraryVisible: PropTypes.bool,
-    backpackHost: PropTypes.string,
-    backpackVisible: PropTypes.bool,
     basePath: PropTypes.string,
     blocksTabVisible: PropTypes.bool,
     canCreateCopy: PropTypes.bool,
@@ -369,9 +361,9 @@ GUIComponent.propTypes = {
     costumeLibraryVisible: PropTypes.bool,
     costumesTabVisible: PropTypes.bool,
     enableCommunity: PropTypes.bool,
-    importInfoVisible: PropTypes.bool,
     intl: intlShape.isRequired,
     isCreating: PropTypes.bool,
+    isFullScreen: PropTypes.bool,
     isPlayerOnly: PropTypes.bool,
     isRtl: PropTypes.bool,
     isShared: PropTypes.bool,
@@ -396,7 +388,6 @@ GUIComponent.propTypes = {
     onTelemetryModalOptOut: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
-    previewInfoVisible: PropTypes.bool,
     renderLogin: PropTypes.func,
     showComingSoon: PropTypes.bool,
     soundsTabVisible: PropTypes.bool,
@@ -407,8 +398,6 @@ GUIComponent.propTypes = {
     vm: PropTypes.instanceOf(VM).isRequired
 };
 GUIComponent.defaultProps = {
-    backpackHost: null,
-    backpackVisible: false,
     basePath: './',
     canCreateNew: false,
     canEditTitle: false,

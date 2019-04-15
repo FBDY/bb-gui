@@ -5,6 +5,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import VM from '@bbge/vm';
+import ThrottledPropertyHOC from '../lib/throttled-property-hoc.jsx';
+
 import storage from '../lib/storage';
 import getCostumeUrl from '../lib/get-costume-url';
 
@@ -16,8 +18,6 @@ class Watermark extends React.Component {
         bindAll(this, [
             'getCostumeData'
         ]);
-        // Asset ID of the current sprite's current costume
-        this.decodedAssetId = null;
     }
 
     getCostumeData () {
@@ -64,6 +64,8 @@ const mapStateToProps = state => {
 
 const ConnectedComponent = connect(
     mapStateToProps
-)(Watermark);
+)(
+    ThrottledPropertyHOC('asset', 500)(Watermark)
+);
 
 export default ConnectedComponent;
