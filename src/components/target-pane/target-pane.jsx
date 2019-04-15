@@ -29,6 +29,7 @@ const TargetPane = ({
     onChangeSpriteVisibility,
     onChangeSpriteX,
     onChangeSpriteY,
+    onCloneSprite,
     onDeleteSprite,
     onDrop,
     onDuplicateSprite,
@@ -67,6 +68,7 @@ const TargetPane = ({
             onChangeSpriteVisibility={onChangeSpriteVisibility}
             onChangeSpriteX={onChangeSpriteX}
             onChangeSpriteY={onChangeSpriteY}
+            onCloneSprite={onCloneSprite}
             onDeleteSprite={onDeleteSprite}
             onDrop={onDrop}
             onDuplicateSprite={onDuplicateSprite}
@@ -138,6 +140,7 @@ TargetPane.propTypes = {
     onChangeSpriteVisibility: PropTypes.func,
     onChangeSpriteX: PropTypes.func,
     onChangeSpriteY: PropTypes.func,
+    onCloneSprite: PropTypes.func,
     onDeleteSprite: PropTypes.func,
     onDrop: PropTypes.func,
     onDuplicateSprite: PropTypes.func,

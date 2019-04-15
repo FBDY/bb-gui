@@ -52,38 +52,48 @@ const SpriteSelectorItem = props => (
                 size={CloseButton.SIZE_SMALL}
                 onClick={props.onDeleteButtonClick}
             />
-        ) : null }
-        {props.onDuplicateButtonClick || props.onDeleteButtonClick || props.onExportButtonClick ? (
-            <ContextMenu id={`${props.name}-${contextMenuId++}`}>
-                {props.onDuplicateButtonClick ? (
-                    <MenuItem onClick={props.onDuplicateButtonClick}>
-                        <FormattedMessage
-                            defaultMessage="duplicate"
-                            description="Menu item to duplicate in the right click menu"
-                            id="gui.spriteSelectorItem.contextMenuDuplicate"
-                        />
-                    </MenuItem>
-                ) : null}
-                {props.onExportButtonClick ? (
-                    <MenuItem onClick={props.onExportButtonClick}>
-                        <FormattedMessage
-                            defaultMessage="export"
-                            description="Menu item to export the selected item"
-                            id="gui.spriteSelectorItem.contextMenuExport"
-                        />
-                    </MenuItem>
-                ) : null }
-                {props.onDeleteButtonClick ? (
-                    <BorderedMenuItem onClick={props.onDeleteButtonClick}>
-                        <FormattedMessage
-                            defaultMessage="delete"
-                            description="Menu item to delete in the right click menu"
-                            id="gui.spriteSelectorItem.contextMenuDelete"
-                        />
-                    </BorderedMenuItem>
-                ) : null }
-            </ContextMenu>
         ) : null}
+        {props.onCloneButtonClick || props.onDuplicateButtonClick || props.onDeleteButtonClick ||
+            props.onExportButtonClick ? (
+                <ContextMenu id={`${props.name}-${contextMenuId++}`}>
+                    {props.onDuplicateButtonClick ? (
+                        <MenuItem onClick={props.onDuplicateButtonClick}>
+                            <FormattedMessage
+                                defaultMessage="duplicate"
+                                description="Menu item to duplicate in the right click menu"
+                                id="gui.spriteSelectorItem.contextMenuDuplicate"
+                            />
+                        </MenuItem>
+                    ) : null}
+                    {props.onCloneButtonClick ? (
+                        <MenuItem onClick={props.onCloneButtonClick}>
+                            <FormattedMessage
+                                defaultMessage="clone"
+                                description="Menu item to create permanent clone in the right click menu"
+                                id="gui.spriteSelectorItem.contextMenuClone"
+                            />
+                        </MenuItem>
+                    ) : null}
+                    {props.onExportButtonClick ? (
+                        <MenuItem onClick={props.onExportButtonClick}>
+                            <FormattedMessage
+                                defaultMessage="export"
+                                description="Menu item to export the selected item"
+                                id="gui.spriteSelectorItem.contextMenuExport"
+                            />
+                        </MenuItem>
+                    ) : null}
+                    {props.onDeleteButtonClick ? (
+                        <BorderedMenuItem onClick={props.onDeleteButtonClick}>
+                            <FormattedMessage
+                                defaultMessage="delete"
+                                description="Menu item to delete in the right click menu"
+                                id="gui.spriteSelectorItem.contextMenuDelete"
+                            />
+                        </BorderedMenuItem>
+                    ) : null}
+                </ContextMenu>
+            ) : null}
     </ContextMenuTrigger>
 );
 
@@ -95,6 +105,7 @@ SpriteSelectorItem.propTypes = {
     name: PropTypes.string.isRequired,
     number: PropTypes.number,
     onClick: PropTypes.func,
+    onCloneButtonClick: PropTypes.func,
     onDeleteButtonClick: PropTypes.func,
     onDuplicateButtonClick: PropTypes.func,
     onExportButtonClick: PropTypes.func,

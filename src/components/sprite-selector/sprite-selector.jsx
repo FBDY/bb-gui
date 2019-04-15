@@ -52,6 +52,7 @@ const SpriteSelectorComponent = function (props) {
         onChangeSpriteVisibility,
         onChangeSpriteX,
         onChangeSpriteY,
+        onCloneSprite,
         onDrop,
         onDeleteSprite,
         onDuplicateSprite,
@@ -106,6 +107,7 @@ const SpriteSelectorComponent = function (props) {
                 items={Object.keys(sprites).map(id => sprites[id])}
                 raised={raised}
                 selectedId={selectedId}
+                onCloneSprite={onCloneSprite}
                 onDeleteSprite={onDeleteSprite}
                 onDrop={onDrop}
                 onDuplicateSprite={onDuplicateSprite}
@@ -160,6 +162,7 @@ SpriteSelectorComponent.propTypes = {
     onChangeSpriteVisibility: PropTypes.func,
     onChangeSpriteX: PropTypes.func,
     onChangeSpriteY: PropTypes.func,
+    onCloneSprite: PropTypes.func,
     onDeleteSprite: PropTypes.func,
     onDrop: PropTypes.func,
     onDuplicateSprite: PropTypes.func,
