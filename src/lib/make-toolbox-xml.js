@@ -126,7 +126,11 @@ const motion = function (isStage, targetId) {
             </value>
         </block>
         ${blockSeparator}
-        <block type="motion_ifonedgebounce"/>
+        <block type="motion_ifonedgebounce">
+            <value name="ON">
+                <shadow type="motion_ifonedgebounce_menu"></shadow>
+            </value>
+        </block>
         ${blockSeparator}
         <block type="motion_setrotationstyle"/>
         ${blockSeparator}
