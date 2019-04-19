@@ -5,10 +5,10 @@ import VM from '@bbge/vm';
 import {connect} from 'react-redux';
 import {getEventXY} from '../lib/touch-utils';
 import {getVariableValue, setVariableValue} from '../lib/variable-utils';
-import ListMonitorComponent from '../components/monitor/list-monitor.jsx';
+import DictMonitorComponent from '../components/monitor/dict-monitor.jsx';
 import {Map} from 'immutable';
 
-class ListMonitor extends React.Component {
+class DictMonitor extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
@@ -163,7 +163,7 @@ class ListMonitor extends React.Component {
             ...props
         } = this.props;
         return (
-            <ListMonitorComponent
+            <DictMonitorComponent
                 {...props}
                 activeIndex={this.state.activeIndex}
                 activeValue={this.state.activeValue}
@@ -182,7 +182,7 @@ class ListMonitor extends React.Component {
     }
 }
 
-ListMonitor.propTypes = {
+DictMonitor.propTypes = {
     height: PropTypes.number,
     id: PropTypes.string,
     targetId: PropTypes.string,
@@ -198,4 +198,4 @@ ListMonitor.propTypes = {
 
 const mapStateToProps = state => ({vm: state.scratchGui.vm});
 
-export default connect(mapStateToProps)(ListMonitor);
+export default connect(mapStateToProps)(DictMonitor);

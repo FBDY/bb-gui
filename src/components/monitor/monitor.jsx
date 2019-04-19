@@ -49,7 +49,8 @@ const MonitorComponent = props => (
             <Box
                 className={styles.monitorContainer}
                 componentRef={props.componentRef}
-                onDoubleClick={props.mode === 'list' || props.mode === 'dict' || !props.draggable ?  null : props.onNextMode}
+                onDoubleClick={props.mode === 'list' || props.mode === 'dict' || !props.draggable ?
+                    null : props.onNextMode}
             >
                 {React.createElement(modes[props.mode], {
                     categoryColor: categories[props.category],

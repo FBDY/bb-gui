@@ -7,7 +7,7 @@ import {FormattedMessage} from 'react-intl';
 import styles from './monitor.css';
 import {List} from 'react-virtualized';
 
-class ListMonitorScroller extends React.Component {
+class DictMonitorScroller extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
@@ -94,7 +94,7 @@ class ListMonitorScroller extends React.Component {
     }
 }
 
-ListMonitorScroller.propTypes = {
+DictMonitorScroller.propTypes = {
     activeIndex: PropTypes.number,
     activeValue: PropTypes.string,
     categoryColor: PropTypes.string,
@@ -112,4 +112,4 @@ ListMonitorScroller.propTypes = {
     ])),
     width: PropTypes.number
 };
-export default ListMonitorScroller;
+export default DictMonitorScroller;

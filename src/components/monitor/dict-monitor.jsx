@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {FormattedMessage} from 'react-intl';
 import styles from './monitor.css';
-import ListMonitorScroller from './list-monitor-scroller.jsx';
+import DictMonitorScroller from './dict-monitor-scroller.jsx';
 
-const ListMonitor = ({draggable, label, width, height, value, onResizeMouseDown, onAdd, ...rowProps}) => (
+const DictMonitor = ({draggable, label, width, height, value, onResizeMouseDown, onAdd, ...rowProps}) => (
     <div
         className={styles.listMonitor}
         style={{
@@ -17,7 +17,7 @@ const ListMonitor = ({draggable, label, width, height, value, onResizeMouseDown,
             {label}
         </div>
         <div className={styles.listBody}>
-            <ListMonitorScroller
+            <DictMonitorScroller
                 draggable={draggable}
                 height={height}
                 values={value}
@@ -52,7 +52,7 @@ const ListMonitor = ({draggable, label, width, height, value, onResizeMouseDown,
     </div>
 );
 
-ListMonitor.propTypes = {
+DictMonitor.propTypes = {
     activeIndex: PropTypes.number,
     categoryColor: PropTypes.string.isRequired,
     draggable: PropTypes.bool.isRequired,
@@ -72,9 +72,9 @@ ListMonitor.propTypes = {
     width: PropTypes.number
 };
 
-ListMonitor.defaultProps = {
+DictMonitor.defaultProps = {
     width: 110,
     height: 200
 };
 
-export default ListMonitor;
+export default DictMonitor;
