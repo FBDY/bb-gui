@@ -17,7 +17,7 @@ const DictMonitor = ({draggable, label, width, height, value, onResizeMouseDown,
             {label}
         </div>
         <div className={styles.listBody}>
-            <ListMonitorScroller
+            <DictMonitorScroller
                 draggable={draggable}
                 height={height}
                 values={value}
