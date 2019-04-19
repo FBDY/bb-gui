@@ -165,6 +165,7 @@ class Monitor extends React.Component {
         const monitorProps = monitorAdapter(this.props);
         const showSliderOption = availableModes(this.props.opcode).indexOf('slider') !== -1;
         const isList = this.props.mode === 'list';
+        const isDict = this.props.mode === 'dict';
         return (
             <MonitorComponent
                 componentRef={this.setElement}
@@ -181,8 +182,8 @@ class Monitor extends React.Component {
                 onExport={isList ? this.handleExport : null} // TODO: Import/export for dicts
                 onImport={isList ? this.handleImport : null}
                 onNextMode={this.handleNextMode}
-                onSetModeToDefault={isList ? null : this.handleSetModeToDefault}
-                onSetModeToLarge={isList ? null : this.handleSetModeToLarge}
+                onSetModeToDefault={isList || isDict ? null : this.handleSetModeToDefault}
+                onSetModeToLarge={isList || isDict ? null : this.handleSetModeToLarge}
                 onSetModeToSlider={showSliderOption ? this.handleSetModeToSlider : null}
             />
         );
