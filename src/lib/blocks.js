@@ -200,10 +200,8 @@ export default function (vm) {
 
     ScratchBlocks.Blocks.motion_ifonedgebounce_menu.init = function () {
         const edge = ScratchBlocks.ScratchMsgs.translate('MOTION_IFON_EDGE', 'edge');
-        const mouse = ScratchBlocks.ScratchMsgs.translate('MOTION_IFON_POINTER', 'mouse-pointer');
         const json = jsonForMenuBlock('ON', spriteMenu, motionColors, [
             [edge, '_edge_'],
-            [mouse, '_mouse_']
         ]);
         this.jsonInit(json);
     };
