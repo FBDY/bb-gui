@@ -322,6 +322,16 @@ export default function (vm) {
         this.jsonInit(json);
     };
 
+    ScratchBlocks.Blocks.event_touchingobjectmenu.init = function () {
+        const mouse = ScratchBlocks.ScratchMsgs.translate('SENSING_TOUCHINGOBJECT_POINTER', 'mouse-pointer');
+        const edge = ScratchBlocks.ScratchMsgs.translate('SENSING_TOUCHINGOBJECT_EDGE', 'edge');
+        const json = jsonForMenuBlock('TOUCHINGOBJECTMENU', spriteMenu, eventColors, [
+            [mouse, '_mouse_'],
+            [edge, '_edge_']
+        ]);
+        this.jsonInit(json);
+    };
+
     ScratchBlocks.Blocks.event_sendmsg_target_menu.init = function () {
         const json = jsonForMenuBlock('SENDMSG_TARGET', sendmsgTargetMenu, eventColors, []);
         this.jsonInit(json);
