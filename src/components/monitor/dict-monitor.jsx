@@ -5,6 +5,13 @@ import {FormattedMessage} from 'react-intl';
 import styles from './monitor.css';
 import DictMonitorScroller from './dict-monitor-scroller.jsx';
 
+const Example = ({ data }) =>
+  Object.entries(data).map(([k, v]) => (
+    <div key={k}>
+      {k}: {v}
+    </div>
+  ));
+
 const DictMonitor = ({draggable, label, width, height, value, onResizeMouseDown, onAdd, ...rowProps}) => (
     <div
         className={styles.listMonitor}
@@ -13,41 +20,10 @@ const DictMonitor = ({draggable, label, width, height, value, onResizeMouseDown,
             height: `${height}px`
         }}
     >
-        <div className={styles.listHeader}>
-            {label}
-        </div>
         <div className={styles.listBody}>
-            <DictMonitorScroller
-                draggable={draggable}
-                height={height}
-                values={value}
-                width={width}
-                {...rowProps}
+            <Example
+                data={value}
             />
-        </div>
-        <div className={styles.listFooter}>
-            <div
-                className={classNames(draggable ? styles.addButton : null, 'no-drag')}
-                onClick={draggable ? onAdd : null}
-            >
-                {'+' /* TODO waiting on asset */}
-            </div>
-            <div className={styles.footerLength}>
-                <FormattedMessage
-                    defaultMessage="length {length}"
-                    description="Length label on list monitors. DO NOT translate {length} (with brackets)."
-                    id="gui.monitor.listMonitor.listLength"
-                    values={{
-                        length: value.length
-                    }}
-                />
-            </div>
-            <div
-                className={classNames(draggable ? styles.resizeHandle : null, 'no-drag')}
-                onMouseDown={draggable ? onResizeMouseDown : null}
-            >
-                {'=' /* TODO waiting on asset */}
-            </div>
         </div>
     </div>
 );
@@ -61,14 +37,7 @@ DictMonitor.propTypes = {
     onActivate: PropTypes.func,
     onAdd: PropTypes.func,
     onResizeMouseDown: PropTypes.func,
-    value: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number,
-        PropTypes.arrayOf(PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.number
-        ]))
-    ]),
+    value: PropTypes.objectOf(PropTypes.string), // TODO: Typecheck the members?
     width: PropTypes.number
 };
 
