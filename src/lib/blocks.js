@@ -198,6 +198,16 @@ export default function (vm) {
         this.jsonInit(json);
     };
 
+    ScratchBlocks.Blocks.motion_ifonedgebounce_menu.init = function () {
+        const edge = ScratchBlocks.ScratchMsgs.translate('MOTION_IFON_EDGE', 'edge');
+        const mouse = ScratchBlocks.ScratchMsgs.translate('MOTION_IFON_POINTER', 'mouse-pointer');
+        const json = jsonForMenuBlock('ON', spriteMenu, motionColors, [
+            [edge, '_edge_'],
+            [mouse, '_mouse_']
+        ]);
+        this.jsonInit(json);
+    };
+
     ScratchBlocks.Blocks.motion_glideto_menu.init = function () {
         const random = ScratchBlocks.ScratchMsgs.translate('MOTION_GLIDETO_RANDOM', 'random position');
         const mouse = ScratchBlocks.ScratchMsgs.translate('MOTION_GLIDETO_POINTER', 'mouse-pointer');
@@ -309,6 +319,16 @@ export default function (vm) {
 
     ScratchBlocks.Blocks.control_create_clone_of_menu.init = function () {
         const json = jsonForMenuBlock('CLONE_OPTION', cloneMenu, controlColors, []);
+        this.jsonInit(json);
+    };
+
+    ScratchBlocks.Blocks.event_touchingobjectmenu.init = function () {
+        const mouse = ScratchBlocks.ScratchMsgs.translate('SENSING_TOUCHINGOBJECT_POINTER', 'mouse-pointer');
+        const edge = ScratchBlocks.ScratchMsgs.translate('SENSING_TOUCHINGOBJECT_EDGE', 'edge');
+        const json = jsonForMenuBlock('TOUCHINGOBJECTMENU', spriteMenu, eventColors, [
+            [mouse, '_mouse_'],
+            [edge, '_edge_']
+        ]);
         this.jsonInit(json);
     };
 
