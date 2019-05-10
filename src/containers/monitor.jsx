@@ -6,7 +6,6 @@ import {injectIntl, intlShape, defineMessages} from 'react-intl';
 import monitorAdapter from '../lib/monitor-adapter.js';
 import MonitorComponent, {monitorModes} from '../components/monitor/monitor.jsx';
 import {addMonitorRect, getInitialPosition, resizeMonitorRect, removeMonitorRect} from '../reducers/monitor-layout';
-import {getVariable, setVariableValue} from '../lib/variable-utils';
 import importCSV from '../lib/import-csv';
 import downloadBlob from '../lib/download-blob';
 
@@ -149,12 +148,12 @@ class Monitor extends React.Component {
             const newListValue = rows.map(row => row[columnNumber - 1])
                 .filter(item => typeof item === 'string'); // CSV importer can leave undefineds
             const {vm, targetId, id: variableId} = this.props;
-            setVariableValue(vm, targetId, variableId, newListValue);
+            vm.setVariableValue(targetId, variableId, newListValue);
         });
     }
     handleExport () {
         const {vm, targetId, id: variableId} = this.props;
-        const variable = getVariable(vm, targetId, variableId);
+        const variable = vm.getVariable(targetId, variableId);
         const text = variable.value.join('\r\n');
         const blob = new Blob([text], {type: 'text/plain;charset=utf-8'});
         downloadBlob(`${variable.name}.txt`, blob);
