@@ -18,7 +18,6 @@ class DictMonitor extends React.Component {
             'handleRemove',
             'handleKeyPress',
             'handleFocus',
-            'handleAdd',
             'handleResizeMouseDown'
         ]);
 
@@ -114,14 +113,6 @@ class DictMonitor extends React.Component {
         });
     }
 
-    handleAdd () {
-        // Add button appends a blank value and switches to it
-        const {vm, targetId, id: variableId} = this.props;
-        const newListValue = getVariableValue(vm, targetId, variableId).concat(['']);
-        setVariableValue(vm, targetId, variableId, newListValue);
-        this.setState({activeIndex: newListValue.length - 1, activeValue: ''});
-    }
-
     handleResizeMouseDown (e) {
         this.initialPosition = getEventXY(e);
         this.initialWidth = this.state.width;
@@ -170,7 +161,6 @@ class DictMonitor extends React.Component {
                 height={this.state.height}
                 width={this.state.width}
                 onActivate={this.handleActivate}
-                onAdd={this.handleAdd}
                 onDeactivate={this.handleDeactivate}
                 onFocus={this.handleFocus}
                 onInput={this.handleInput}

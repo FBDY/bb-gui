@@ -5,7 +5,7 @@ import {FormattedMessage} from 'react-intl';
 import styles from './monitor.css';
 import DictMonitorScroller from './dict-monitor-scroller.jsx';
 
-const DictMonitor = ({draggable, label, width, height, value, onResizeMouseDown, onAdd, ...rowProps}) => (
+const DictMonitor = ({draggable, label, width, height, value, onResizeMouseDown, ...rowProps}) => (
     <div
         className={styles.dictMonitor}
         style={{
@@ -26,12 +26,6 @@ const DictMonitor = ({draggable, label, width, height, value, onResizeMouseDown,
             />
         </div>
         <div className={styles.dictFooter}>
-            <div
-                className={classNames(draggable ? styles.addButton : null, 'no-drag')}
-                onClick={draggable ? onAdd : null}
-            >
-                {'+' /* TODO waiting on asset */}
-            </div>
             <div className={styles.footerLength}>
                 <FormattedMessage
                     defaultMessage="length {length}"
@@ -59,7 +53,6 @@ DictMonitor.propTypes = {
     height: PropTypes.number,
     label: PropTypes.string.isRequired,
     onActivate: PropTypes.func,
-    onAdd: PropTypes.func,
     onResizeMouseDown: PropTypes.func,
     value: PropTypes.oneOfType([
         PropTypes.string,
