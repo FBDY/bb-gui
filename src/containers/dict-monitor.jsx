@@ -46,8 +46,8 @@ class DictMonitor extends React.Component {
         if (this.state.activeIndex !== null) {
             const {vm, targetId, id: variableId} = this.props;
             const newDictValue = getVariableValue(vm, targetId, variableId);
-            newDictValue[this.props.value[this.state.activeIndex].split('➡')[0]]
-                = this.state.activeValue;
+            newDictValue[this.props.value[this.state.activeIndex].split('➡')[0]] =
+                this.state.activeValue;
             setVariableValue(vm, targetId, variableId, newDictValue);
             this.setState({activeIndex: null, activeValue: null});
         }
@@ -64,7 +64,6 @@ class DictMonitor extends React.Component {
         // Arrow down / arrow up navigate down / up the list.
         // Enter / shift+enter insert new blank item below / above.
         const previouslyActiveIndex = this.state.activeIndex;
-        const {vm, targetId, id: variableId} = this.props;
 
         let navigateDirection = 0;
         if (e.key === 'Tab') navigateDirection = e.shiftKey ? -1 : 1;
@@ -78,8 +77,7 @@ class DictMonitor extends React.Component {
                 activeValue: this.props.value[newIndex].split('➡')[1]
             });
             e.preventDefault(); // Stop default tab behavior, handled by this state change
-        }
-        else if (e.key === 'Enter') {
+        } else if (e.key === 'Enter') {
             this.handleDeactivate(); // Submit edits
         }
     }
