@@ -4,7 +4,6 @@ import React from 'react';
 import VM from '@bbge/vm';
 import {connect} from 'react-redux';
 import {getEventXY} from '../lib/touch-utils';
-import {getVariableValue, setVariableValue} from '../lib/variable-utils';
 import DictMonitorComponent from '../components/monitor/dict-monitor.jsx';
 import {Map} from 'immutable';
 
@@ -45,10 +44,10 @@ class DictMonitor extends React.Component {
         // Submit any in-progress value edits on blur
         if (this.state.activeIndex !== null) {
             const {vm, targetId, id: variableId} = this.props;
-            const newDictValue = getVariableValue(vm, targetId, variableId);
+            const newDictValue = vm.getVariableValue(targetId, variableId);
             newDictValue[this.props.value[this.state.activeIndex].split('➡')[0]] =
                 this.state.activeValue;
-            setVariableValue(vm, targetId, variableId, newDictValue);
+            vm.setVariableValue(targetId, variableId, newDictValue);
             this.setState({activeIndex: null, activeValue: null});
         }
     }
@@ -90,9 +89,9 @@ class DictMonitor extends React.Component {
         e.preventDefault(); // Default would blur input, prevent that.
         e.stopPropagation(); // Bubbling would activate, which will be handled here
         const {vm, targetId, id: variableId} = this.props;
-        const newDictValue = getVariableValue(vm, targetId, variableId);
+        const newDictValue = vm.getVariableValue(targetId, variableId);
         delete newDictValue[this.props.value[this.state.activeIndex].split('➡')[0]];
-        setVariableValue(vm, targetId, variableId, newDictValue);
+        vm.setVariableValue(targetId, variableId, newDictValue);
         this.setState({
             activeIndex: null,
             activeValue: null
