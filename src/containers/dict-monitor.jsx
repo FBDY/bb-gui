@@ -90,14 +90,12 @@ class DictMonitor extends React.Component {
         e.preventDefault(); // Default would blur input, prevent that.
         e.stopPropagation(); // Bubbling would activate, which will be handled here
         const {vm, targetId, id: variableId} = this.props;
-        const listValue = getVariableValue(vm, targetId, variableId);
-        const newListValue = listValue.slice(0, this.state.activeIndex)
-            .concat(listValue.slice(this.state.activeIndex + 1));
-        setVariableValue(vm, targetId, variableId, newListValue);
-        const newActiveIndex = Math.min(newListValue.length - 1, this.state.activeIndex);
+        const newDictValue = getVariableValue(vm, targetId, variableId);
+        delete newDictValue[this.props.value[this.state.activeIndex].split('➡')[0]];
+        setVariableValue(vm, targetId, variableId, newDictValue);
         this.setState({
-            activeIndex: newActiveIndex,
-            activeValue: newListValue[newActiveIndex]
+            activeIndex: null,
+            activeValue: null
         });
     }
 
