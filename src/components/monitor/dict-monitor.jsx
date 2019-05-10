@@ -7,16 +7,16 @@ import DictMonitorScroller from './dict-monitor-scroller.jsx';
 
 const DictMonitor = ({draggable, label, width, height, value, onResizeMouseDown, onAdd, ...rowProps}) => (
     <div
-        className={styles.listMonitor}
+        className={styles.dictMonitor}
         style={{
             width: `${width}px`,
             height: `${height}px`
         }}
     >
-        <div className={styles.listHeader}>
+        <div className={styles.dictHeader}>
             {label}
         </div>
-        <div className={styles.listBody}>
+        <div className={styles.dictBody}>
             <DictMonitorScroller
                 draggable={draggable}
                 height={height}
@@ -25,7 +25,7 @@ const DictMonitor = ({draggable, label, width, height, value, onResizeMouseDown,
                 {...rowProps}
             />
         </div>
-        <div className={styles.listFooter}>
+        <div className={styles.dictFooter}>
             <div
                 className={classNames(draggable ? styles.addButton : null, 'no-drag')}
                 onClick={draggable ? onAdd : null}
@@ -35,8 +35,8 @@ const DictMonitor = ({draggable, label, width, height, value, onResizeMouseDown,
             <div className={styles.footerLength}>
                 <FormattedMessage
                     defaultMessage="length {length}"
-                    description="Length label on list monitors. DO NOT translate {length} (with brackets)."
-                    id="gui.monitor.listMonitor.listLength"
+                    description="Length label on dict monitors."
+                    id="gui.monitor.dictMonitor.dictLength"
                     values={{
                         length: value.length
                     }}

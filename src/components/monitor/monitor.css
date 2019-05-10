@@ -185,3 +185,72 @@
 .footer-length {
     text-align: center;
 }
+
+.dict-monitor {
+    display: flex;
+    flex-direction: column;
+}
+
+.dict-header {
+    background: $ui-white;
+    border-bottom: 1px solid $ui-black-transparent;
+    text-align: center;
+    padding: 3px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: $text-primary;
+    width: 100%;
+}
+
+.dict-body {
+    background: $ui-primary;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    height: calc(100% - 44px);
+}
+
+.dict-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2px;
+    flex-shrink: 0;
+    transform: translateZ(0); /* Keep sharp when scaled */
+}
+
+.dict-key {
+    font-weight: bold;
+    color: $text-primary;
+    margin: 0 3px;
+}
+
+.dict-value {
+    min-width: 40px;
+    text-align: left;
+    color: white;
+    margin: 0 3px;
+    border-radius: calc($space / 2);
+    border: 1px solid $ui-black-transparent;
+    flex-grow: 1;
+    height: 22px;
+}
+
+.dict-footer {
+    background: $ui-white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 3px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: $text-primary;
+}
+
+.dict-empty {
+    text-align: center;
+    width: 100%;
+    padding: 5px;
+}
