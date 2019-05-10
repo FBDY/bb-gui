@@ -37,7 +37,7 @@ class DictMonitor extends React.Component {
 
         this.setState({
             activeIndex: index,
-            activeValue: this.props.value[index]
+            activeValue: this.props.value[index].split('➡')[1]
         });
     }
 
@@ -45,9 +45,10 @@ class DictMonitor extends React.Component {
         // Submit any in-progress value edits on blur
         if (this.state.activeIndex !== null) {
             const {vm, targetId, id: variableId} = this.props;
-            const newListValue = getVariableValue(vm, targetId, variableId);
-            newListValue[this.state.activeIndex] = this.state.activeValue;
-            setVariableValue(vm, targetId, variableId, newListValue);
+            const newDictValue = getVariableValue(vm, targetId, variableId);
+            newDictValue[this.props.value[this.state.activeIndex].split('➡')[0]]
+                = this.state.activeValue;
+            setVariableValue(vm, targetId, variableId, newDictValue);
             this.setState({activeIndex: null, activeValue: null});
         }
     }
@@ -74,23 +75,12 @@ class DictMonitor extends React.Component {
             const newIndex = this.wrapListIndex(previouslyActiveIndex + navigateDirection, this.props.value.length);
             this.setState({
                 activeIndex: newIndex,
-                activeValue: this.props.value[newIndex]
+                activeValue: this.props.value[newIndex].split('➡')[1]
             });
             e.preventDefault(); // Stop default tab behavior, handled by this state change
-        } else if (e.key === 'Enter') {
-            this.handleDeactivate(); // Submit in-progress edits
-            const newListItemValue = ''; // Enter adds a blank item
-            const newValueOffset = e.shiftKey ? 0 : 1; // Shift-enter inserts above
-            const listValue = getVariableValue(vm, targetId, variableId);
-            const newListValue = listValue.slice(0, previouslyActiveIndex + newValueOffset)
-                .concat([newListItemValue])
-                .concat(listValue.slice(previouslyActiveIndex + newValueOffset));
-            setVariableValue(vm, targetId, variableId, newListValue);
-            const newIndex = this.wrapListIndex(previouslyActiveIndex + newValueOffset, newListValue.length);
-            this.setState({
-                activeIndex: newIndex,
-                activeValue: newListItemValue
-            });
+        }
+        else if (e.key === 'Enter') {
+            this.handleDeactivate(); // Submit edits
         }
     }
 
