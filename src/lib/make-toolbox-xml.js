@@ -359,6 +359,11 @@ const events = function (isStage) {
         `}
         <block type="event_whenbackdropswitchesto">
         </block>
+        <block type="event_whentouchingobject">
+            <value name="TOUCHINGOBJECTMENU">
+                <shadow type="event_touchingobjectmenu"/>
+            </value>
+        </block>
         ${blockSeparator}
         <block type="event_whengreaterthan">
             <value name="VALUE">
