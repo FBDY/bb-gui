@@ -31,13 +31,14 @@ class DictMonitorScroller extends React.Component {
         );
     }
     rowRenderer ({index, key, style}) {
+        const [dictKey, dictValue] = this.props.values[index].split('➡');
         return (
             <div
                 className={styles.dictRow}
                 key={key}
                 style={style}
             >
-                <div className={styles.dictKey}>{index + 1 /* one indexed */}</div>
+                <div className={styles.dictKey}>{dictKey}</div>
                 <div
                     className={styles.dictValue}
                     dataIndex={index}
@@ -67,7 +68,7 @@ class DictMonitorScroller extends React.Component {
                         </div>
 
                     ) : (
-                        <div className={styles.valueInner}>{this.props.values[index]}</div>
+                        <div className={styles.valueInner}>{dictValue}</div>
                     )}
                 </div>
             </div>
