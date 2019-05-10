@@ -177,7 +177,6 @@ DictMonitor.propTypes = {
     id: PropTypes.string,
     targetId: PropTypes.string,
     value: PropTypes.oneOfType([
-        PropTypes.number,
         PropTypes.string
     ]),
     vm: PropTypes.instanceOf(VM),

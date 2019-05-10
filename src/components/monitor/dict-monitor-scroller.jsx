@@ -108,8 +108,7 @@ DictMonitorScroller.propTypes = {
     onKeyPress: PropTypes.func,
     onRemove: PropTypes.func,
     values: PropTypes.arrayOf(PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
+        PropTypes.string
     ])),
     width: PropTypes.number
 };

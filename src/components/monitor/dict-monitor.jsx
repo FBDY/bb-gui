@@ -58,8 +58,7 @@ DictMonitor.propTypes = {
         PropTypes.string,
         PropTypes.number,
         PropTypes.arrayOf(PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.number
+            PropTypes.string
         ]))
     ]),
     width: PropTypes.number
