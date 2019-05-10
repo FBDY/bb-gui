@@ -21,11 +21,11 @@ class DictMonitorScroller extends React.Component {
     }
     noRowsRenderer () {
         return (
-            <div className={classNames(styles.listRow, styles.listEmpty)}>
+            <div className={classNames(styles.dictRow, styles.dictEmpty)}>
                 <FormattedMessage
                     defaultMessage="(empty)"
-                    description="Text shown on a list monitor when a list is empty"
-                    id="gui.monitor.listMonitor.empty"
+                    description="Text shown on a dict monitor when a dict is empty"
+                    id="gui.monitor.dictMonitor.empty"
                 />
             </div>
         );
@@ -33,13 +33,13 @@ class DictMonitorScroller extends React.Component {
     rowRenderer ({index, key, style}) {
         return (
             <div
-                className={styles.listRow}
+                className={styles.dictRow}
                 key={key}
                 style={style}
             >
-                <div className={styles.listIndex}>{index + 1 /* one indexed */}</div>
+                <div className={styles.dictKey}>{index + 1 /* one indexed */}</div>
                 <div
-                    className={styles.listValue}
+                    className={styles.dictValue}
                     dataIndex={index}
                     style={{background: this.props.categoryColor}}
                     onClick={this.props.draggable ? this.handleEventFactory(index) : null}
@@ -49,7 +49,7 @@ class DictMonitorScroller extends React.Component {
                             <input
                                 autoFocus
                                 autoComplete={false}
-                                className={classNames(styles.listInput, 'no-drag')}
+                                className={classNames(styles.dictInput, 'no-drag')}
                                 spellCheck={false}
                                 type="text"
                                 value={this.props.activeValue}
