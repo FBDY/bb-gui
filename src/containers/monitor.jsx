@@ -16,11 +16,13 @@ import VM from '@bbge/vm';
 const availableModes = opcode => (
     monitorModes.filter(t => {
         if (opcode === 'data_variable') {
-            return t !== 'list';
+            return t !== 'list' && t !== 'dict';
         } else if (opcode === 'data_listcontents') {
             return t === 'list';
+        } else if (opcode === 'data_dictcontents') {
+            return t === 'dict';
         }
-        return t !== 'slider' && t !== 'list';
+        return t !== 'slider' && t !== 'list' && t !== 'dict';
     })
 );
 
@@ -162,6 +164,7 @@ class Monitor extends React.Component {
         const monitorProps = monitorAdapter(this.props);
         const showSliderOption = availableModes(this.props.opcode).indexOf('slider') !== -1;
         const isList = this.props.mode === 'list';
+        const isDict = this.props.mode === 'dict';
         return (
             <MonitorComponent
                 componentRef={this.setElement}
@@ -175,11 +178,11 @@ class Monitor extends React.Component {
                 targetId={this.props.targetId}
                 width={this.props.width}
                 onDragEnd={this.handleDragEnd}
-                onExport={isList ? this.handleExport : null}
+                onExport={isList ? this.handleExport : null} // TODO: Import/export for dicts
                 onImport={isList ? this.handleImport : null}
                 onNextMode={this.handleNextMode}
-                onSetModeToDefault={isList ? null : this.handleSetModeToDefault}
-                onSetModeToLarge={isList ? null : this.handleSetModeToLarge}
+                onSetModeToDefault={isList || isDict ? null : this.handleSetModeToDefault}
+                onSetModeToLarge={isList || isDict ? null : this.handleSetModeToLarge}
                 onSetModeToSlider={showSliderOption ? this.handleSetModeToSlider : null}
             />
         );
@@ -195,7 +198,7 @@ Monitor.propTypes = {
     isDiscrete: PropTypes.bool,
     max: PropTypes.number,
     min: PropTypes.number,
-    mode: PropTypes.oneOf(['default', 'slider', 'large', 'list']),
+    mode: PropTypes.oneOf(['default', 'slider', 'large', 'list', 'dict']),
     monitorLayout: PropTypes.shape({
         monitors: PropTypes.object,
         savedMonitorPositions: PropTypes.object

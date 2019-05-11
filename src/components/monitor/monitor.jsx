@@ -10,6 +10,7 @@ import DefaultMonitor from './default-monitor.jsx';
 import LargeMonitor from './large-monitor.jsx';
 import SliderMonitor from '../../containers/slider-monitor.jsx';
 import ListMonitor from '../../containers/list-monitor.jsx';
+import DictMonitor from '../../containers/dict-monitor.jsx';
 
 import styles from './monitor.css';
 
@@ -20,6 +21,7 @@ const categories = {
     looks: '#9966FF',
     motion: '#4C97FF',
     list: '#FC662C',
+    dict: '#FC662C',
     extension: '#0FBD8C'
 };
 
@@ -27,7 +29,8 @@ const modes = {
     default: DefaultMonitor,
     large: LargeMonitor,
     slider: SliderMonitor,
-    list: ListMonitor
+    list: ListMonitor,
+    dict: DictMonitor
 };
 
 const MonitorComponent = props => (
@@ -46,7 +49,8 @@ const MonitorComponent = props => (
             <Box
                 className={styles.monitorContainer}
                 componentRef={props.componentRef}
-                onDoubleClick={props.mode === 'list' || !props.draggable ? null : props.onNextMode}
+                onDoubleClick={props.mode === 'list' || props.mode === 'dict' || !props.draggable ?
+                    null : props.onNextMode}
             >
                 {React.createElement(modes[props.mode], {
                     categoryColor: categories[props.category],

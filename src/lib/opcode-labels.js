@@ -144,6 +144,7 @@ class OpcodeLabels {
             // Data
             data_variable: {category: 'data'},
             data_listcontents: {category: 'list'},
+            data_dictcontents: {category: 'dict'},
 
             // Sound
             sound_volume: {category: 'sound'},
@@ -200,6 +201,7 @@ class OpcodeLabels {
         // Data
         this._opcodeMap.data_variable.labelFn = params => params.VARIABLE;
         this._opcodeMap.data_listcontents.labelFn = params => params.LIST;
+        this._opcodeMap.data_dictcontents.labelFn = params => params.DICT;
 
         // Sound
         this._opcodeMap.sound_volume.labelFn = () => this._translator(messages.sound_volume);
